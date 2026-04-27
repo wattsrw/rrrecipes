@@ -1,12 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './components/AppRoutes';
 
 function App() {
   return (
     <BrowserRouter basename="/rrrecipes">
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
