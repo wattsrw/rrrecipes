@@ -1,6 +1,6 @@
 import { extendTheme } from '@mui/joy/styles';
 
-const fontColor = '#2f2436';
+export const FONT_COLOR = '#2f2436';
 
 const theme = extendTheme({
     fontFamily: {
@@ -23,7 +23,7 @@ const theme = extendTheme({
                     900: '#210033',
                 },
                 text: {
-                    primary: fontColor,
+                    primary: FONT_COLOR,
                 },
             },
         },
@@ -34,19 +34,19 @@ const theme = extendTheme({
                 root: ({ ownerState }) => ({
                     ...(ownerState.level === 'h1' && {
                         fontFamily: '"Poiret One", cursive',
-                        color: fontColor,
+                        color: FONT_COLOR,
                     }),
                     ...(ownerState.level === 'h2' && {
                         fontFamily: '"Poiret One", cursive',
-                        color: fontColor,
+                        color: FONT_COLOR,
                     }),
                     ...(ownerState.level === 'h3' && {
                         fontFamily: '"Poiret One", cursive',
-                        color: fontColor,
+                        color: FONT_COLOR,
                     }),
                     ...(ownerState.level === 'h4' && {
                         fontFamily: '"Poiret One", cursive',
-                        color: fontColor,
+                        color: FONT_COLOR,
                     }),
                 }),
             },

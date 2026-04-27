@@ -51,4 +51,5 @@ npm run preview
 
 ### Design Considerations
 - Use Joy UI package for styling and components
+- Use Joy UI's layout components for responsive design
 - Optimize for mobile devices, but design for desktop too
