@@ -3,33 +3,27 @@ import { useParams } from 'react-router-dom';
 import CategoryCard from '../components/CategoryCard';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug } from '../utils/Util';
+import { RECIPE_MAPPING } from '../utils/RecipeMapping';
 
 function Category() {
     const { category } = useParams<{ category: string }>();
     const title = formatTitleFromSlug(category);
 
+    // Get recipes for this category from RECIPE_MAPPING
+    const recipes = RECIPE_MAPPING[category as keyof typeof RECIPE_MAPPING] || [];
+
     return (
         <Layout title={title}>
             {/* Recipe Grid */}
             <Grid container spacing={2}>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🍳" title="Scrambled Eggs" link={`/${category}/scrambled-eggs`} />
-                </Grid>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🥞" title="Pancakes" link={`/${category}/pancakes`} />
-                </Grid>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🧇" title="Waffles" link={`/${category}/waffles`} />
-                </Grid>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🥐" title="Croissants" link={`/${category}/croissants`} />
-                </Grid>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🍞" title="Toast" link={`/${category}/toast`} />
-                </Grid>
-                <Grid xs={12} sm={6} md={4}>
-                    <CategoryCard icon="🧀" title="Cheese Omelet" link={`/${category}/cheese-omelet`} />
-                </Grid>
+                {recipes.map((recipe) => (
+                    <Grid xs={12} sm={6} md={4} key={recipe}>
+                        <CategoryCard
+                            title={formatTitleFromSlug(recipe)}
+                            link={`/${category}/${recipe}`}
+                        />
+                    </Grid>
+                ))}
             </Grid>
         </Layout>
     );

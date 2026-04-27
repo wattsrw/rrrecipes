@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, Stack } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 
 interface CategoryProps {
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
     title: string;
     link: string;
 }
@@ -22,7 +22,7 @@ function CategoryCard({ icon, title, link }: CategoryProps) {
         >
             <CardContent>
                 <Stack spacing={1} alignItems="center" textAlign="center">
-                    <div style={{ fontSize: '2rem' }}>{icon}</div>
+                    {icon && <div style={{ fontSize: '2rem' }}>{icon}</div>}
                     <Typography level="body-lg" fontWeight="lg">
                         {title}
                     </Typography>
