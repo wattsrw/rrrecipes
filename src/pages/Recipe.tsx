@@ -1,12 +1,12 @@
 import { Grid, Typography, Box, Button, Drawer, List, ListItem } from '@mui/joy';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug } from '../utils/Util';
 import IngredientList from '../components/IngredientList';
 
 function Recipe() {
-    const { recipe } = useParams<{ recipe: string }>();
+    const { category, recipe } = useParams<{ category: string; recipe: string }>();
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -17,6 +17,31 @@ function Recipe() {
         { ingredient: 'Salt and pepper to taste' },
         { ingredient: 'Fresh herbs (optional)' },
     ];
+
+    // Load and read the markdown file
+    useEffect(() => {
+        const loadMarkdownFile = async () => {
+            try {
+                // Construct the path to the markdown file
+                const mdPath = `/rrrecipes/recipes/${category}/${recipe}.md`;
+
+                // Fetch the markdown file
+                const response = await fetch(mdPath);
+                if (response.ok) {
+                    const content = await response.text();
+                    console.log(`Contents of ${category}/${recipe}.md:`, content);
+                } else {
+                    console.warn(`Markdown file not found: ${mdPath}`);
+                }
+            } catch (error) {
+                console.error('Error loading markdown file:', error);
+            }
+        };
+
+        if (category && recipe) {
+            loadMarkdownFile();
+        }
+    }, [category, recipe]);
 
     return (
         <Layout title={title}>

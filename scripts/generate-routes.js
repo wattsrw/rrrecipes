@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const recipesDir = path.join(__dirname, '../src/assets/recipes');
+const recipesDir = path.join(__dirname, '../src/public/recipes');
 const outputFile = path.join(__dirname, '../src/utils/RecipeMapping.ts');
 
 try {
