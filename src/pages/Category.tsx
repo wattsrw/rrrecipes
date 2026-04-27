@@ -2,17 +2,11 @@ import { Grid } from '@mui/joy';
 import { useParams } from 'react-router-dom';
 import CategoryCard from '../components/CategoryCard';
 import Layout from '../components/Layout';
+import { formatTitleFromSlug } from '../utils/Util';
 
 function Category() {
     const { category } = useParams<{ category: string }>();
-
-    // Format the category name from URL slug
-    const title = category
-        ? category
-            .split('-')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-        : 'Recipes';
+    const title = formatTitleFromSlug(category);
 
     return (
         <Layout title={title}>
