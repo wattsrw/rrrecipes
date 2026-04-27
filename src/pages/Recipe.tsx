@@ -86,6 +86,7 @@ function Recipe() {
                             backgroundColor: 'primary.50',
                             padding: '1rem',
                             borderRadius: '8px',
+                            height: 'fit-content',
                         }}
                     >
                         <IngredientList items={ingredients} />
