@@ -25,7 +25,6 @@ function Recipe() {
             </Box>
 
 
-
             {/* Ingredients Drawer */}
             <Drawer
                 anchor="bottom"
@@ -42,16 +41,7 @@ function Recipe() {
                         overflow: 'auto',
                     }}
                 >
-                    <Typography level="h2" sx={{ marginBottom: '1rem' }}>
-                        Ingredients
-                    </Typography>
-                    <List sx={{ paddingLeft: '1.5rem' }}>
-                        <ListItem>2 eggs</ListItem>
-                        <ListItem>1 cup milk</ListItem>
-                        <ListItem>2 tbsp butter</ListItem>
-                        <ListItem>Salt and pepper to taste</ListItem>
-                        <ListItem>Fresh herbs (optional)</ListItem>
-                    </List>
+                    <IngredientList />
                 </Box>
             </Drawer>
 
@@ -65,16 +55,7 @@ function Recipe() {
                             borderRadius: '8px',
                         }}
                     >
-                        <Typography level="h2" sx={{ marginBottom: '1rem' }}>
-                            Ingredients
-                        </Typography>
-                        <List sx={{ paddingLeft: '1.5rem' }}>
-                            <ListItem>2 eggs</ListItem>
-                            <ListItem>1 cup milk</ListItem>
-                            <ListItem>2 tbsp butter</ListItem>
-                            <ListItem>Salt and pepper to taste</ListItem>
-                            <ListItem>Fresh herbs (optional)</ListItem>
-                        </List>
+                        <IngredientList />
                     </Box>
                 </Grid>
 
