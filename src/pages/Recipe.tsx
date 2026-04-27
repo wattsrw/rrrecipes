@@ -10,6 +10,14 @@ function Recipe() {
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
+    const ingredients = [
+        { amount: '2', ingredient: 'eggs' },
+        { amount: '1 cup', ingredient: 'milk' },
+        { amount: '2 tbsp', ingredient: 'butter' },
+        { ingredient: 'Salt and pepper to taste' },
+        { ingredient: 'Fresh herbs (optional)' },
+    ];
+
     return (
         <Layout title={title}>
             {/* Mobile Ingredients Button */}
@@ -41,7 +49,7 @@ function Recipe() {
                         overflow: 'auto',
                     }}
                 >
-                    <IngredientList />
+                    <IngredientList items={ingredients} />
                 </Box>
             </Drawer>
 
@@ -55,7 +63,7 @@ function Recipe() {
                             borderRadius: '8px',
                         }}
                     >
-                        <IngredientList />
+                        <IngredientList items={ingredients} />
                     </Box>
                 </Grid>
 
