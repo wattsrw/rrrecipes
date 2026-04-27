@@ -14,6 +14,8 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      tseslint.configs.recommendedTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
     ],
     languageOptions: {
       globals: globals.browser,
