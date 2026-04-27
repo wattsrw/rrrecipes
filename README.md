@@ -36,10 +36,19 @@
         - hard break line
         - breadcrumbs (left)
         - collapseable ingredient list on the side
-            - which side?
-            - background color? pastel
+            - which side? bottom
+            - background color? pastel purple
         - numbered steps in main content
+            - highlight ingredients with bold and color
         - notes somewhere? maybe don't need
+    - use MUI
+        - drawer for mobile ingredients
+        - breadcrumbs at top
+        - divider under titles
+        - paper for navigation icons
+        - svg icons
+
+
 
 ## Structure
 - Indoors
@@ -61,6 +70,7 @@
         - vanilla
     - baking
         - chocolate chip cookies
+        - hamatachen
 - bread
     - rye
     - french
