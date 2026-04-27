@@ -1,6 +1,6 @@
 import { Typography, List, ListItem, Box } from '@mui/joy';
 
-interface Ingredient {
+export interface Ingredient {
     amount?: string;
     ingredient: string;
 }
