@@ -47,3 +47,8 @@ npm run preview
 - `vite.config.ts` - Vite configuration
 - `tsconfig.json` - TypeScript configuration
 - `eslint.config.js` - ESLint configuration
+
+
+### Design Considerations
+- Use Joy UI package for styling and components
+- Optimize for mobile devices, but design for desktop too

@@ -1,6 +1,8 @@
+import { Typography } from '@mui/joy';
+
 function Home() {
     return (
-        <h1>RRRecipes</h1>
+        <Typography level="h1">RRRecipes</Typography>
     );
 }
 
