@@ -7,7 +7,7 @@ interface CategoryProps {
     link: string;
 }
 
-function Category({ icon, title, link }: CategoryProps) {
+function CategoryCard({ icon, title, link }: CategoryProps) {
     const navigate = useNavigate();
 
     return (
@@ -32,4 +32,4 @@ function Category({ icon, title, link }: CategoryProps) {
     );
 }
 
-export default Category;
+export default CategoryCard;
