@@ -37,13 +37,15 @@ npm run generate-routes
     - has 1 empty line
     - has line ## Directions
 - In the Directions, accent every occurrance of an 'ingredient' with bold and primary color
-- Directions should parse the List of directions to create the order List of ListOtems
-    - account for the optional 'notes', which is an unordered List inside a ListItem
 - Update 'categoryIconMap' to account for all of the keys in RECIPE_MAPPING
 
 ## TODOs
 - In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
 - In the directions, a step is clickable to highlight which step we're on?
+- In the ingredients, a line is clickable to highlight the ingredient?
+    - accent every other line?
+        - divider?
+        - alternating colors?
 - search
 - breadcrumbs
 
