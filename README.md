@@ -32,6 +32,7 @@ npm run generate-routes
         - If there is no tab, then there is no 'amount'
     - Directions should be a List of a new object. Each object has a step(string) and optional notes (List of strings)
 - command to verify all recipe files match stucture
+    - file names use snake-naming-convention
     - first line is ## Ingredients
     - has 1 empty line
     - has line ## Directions

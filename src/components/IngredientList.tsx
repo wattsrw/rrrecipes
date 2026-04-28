@@ -1,12 +1,12 @@
 import { Typography, List, ListItem, Box } from '@mui/joy';
 
-export interface Ingredient {
+export interface IngredientItem {
     amount?: string;
     ingredient: string;
 }
 
 interface IngredientListProps {
-    items: Ingredient[];
+    items: IngredientItem[];
 }
 
 function IngredientList({ items }: IngredientListProps) {

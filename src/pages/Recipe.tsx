@@ -3,20 +3,36 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug } from '../utils/Util';
-import IngredientList from '../components/IngredientList';
+import IngredientList, { type IngredientItem } from '../components/IngredientList';
+
+interface DirectionItem {
+    step: string;
+    notes?: string[]
+}
 
 function Recipe() {
     const { category, recipe } = useParams<{ category: string; recipe: string }>();
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
-
-    const ingredients = [
+    const [ingredients, setIngredients] = useState<IngredientItem[]>([
         { amount: '2', ingredient: 'eggs' },
         { amount: '1 cup', ingredient: 'milk' },
         { amount: '2 tbsp', ingredient: 'butter' },
         { ingredient: 'Salt and pepper to taste' },
         { ingredient: 'Fresh herbs (optional)' },
-    ];
+    ]);
+    const [directions, setDirections] = useState<DirectionItem[]>([
+        { step: 'Heat butter in a non-stick pan over medium heat.' },
+        { step: 'Whisk eggs with milk and seasonings in a bowl.' },
+        { step: 'Pour the egg mixture into the pan.', notes: ['Make sure the eggs are evenly distributed in the pan.'] },
+        { step: 'Stir gently until eggs are cooked through, about 3-4 minutes.' },
+        { step: 'Serve immediately and garnish with fresh herbs if desired.' },
+        { step: 'Heat butter in a non-stick pan over medium heat.' },
+        { step: 'Whisk eggs with milk and seasonings in a bowl.', notes: ['Make sure the eggs are evenly distributed in the pan.', 'Ensure the mixture is well combined.'] },
+        { step: 'Pour the egg mixture into the pan.' },
+        { step: 'Stir gently until eggs are cooked through, about 3-4 minutes.' },
+        { step: 'Serve immediately and garnish with fresh herbs if desired.' },
+    ]);
 
     // Load and read the markdown file
     useEffect(() => {
@@ -104,21 +120,20 @@ function Recipe() {
                             Directions
                         </Typography>
                         <List component="ol" marker="decimal" sx={{ paddingLeft: '1.5rem' }}>
-                            <ListItem>Heat butter in a non-stick pan over medium heat.</ListItem>
-                            <ListItem>Whisk eggs with milk and seasonings in a bowl.</ListItem>
-                            <ListItem>Pour the egg mixture into the pan.</ListItem>
-                            <ListItem>Stir gently until eggs are cooked through, about 3-4 minutes.</ListItem>
-                            <ListItem>Serve immediately and garnish with fresh herbs if desired.</ListItem>
-                            <ListItem>Heat butter in a non-stick pan over medium heat.</ListItem>
-                            <ListItem>Whisk eggs with milk and seasonings in a bowl.</ListItem>
-                            <ListItem>Pour the egg mixture into the pan.</ListItem>
-                            <ListItem>Stir gently until eggs are cooked through, about 3-4 minutes.</ListItem>
-                            <ListItem>Serve immediately and garnish with fresh herbs if desired.</ListItem>
-                            <ListItem>Heat butter in a non-stick pan over medium heat.</ListItem>
-                            <ListItem>Whisk eggs with milk and seasonings in a bowl.</ListItem>
-                            <ListItem>Pour the egg mixture into the pan.</ListItem>
-                            <ListItem>Stir gently until eggs are cooked through, about 3-4 minutes.</ListItem>
-                            <ListItem>Serve immediately and garnish with fresh herbs if desired.</ListItem>
+                            {directions.map((dir, index) => (
+                                <ListItem key={index}>
+                                    {dir.step}
+                                    {dir.notes && (
+                                        <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                                            {dir.notes.map((note, noteIndex) => (
+                                                <ListItem key={noteIndex}>
+                                                    {note}
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    )}
+                                </ListItem>
+                            ))}
                         </List>
                     </Box>
                 </Grid>
