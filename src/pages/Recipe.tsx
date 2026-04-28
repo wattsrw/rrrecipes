@@ -14,14 +14,14 @@ function Recipe() {
     const { category, recipe } = useParams<{ category: string; recipe: string }>();
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [ingredients, setIngredients] = useState<IngredientItem[]>([
+    const [ingredients] = useState<IngredientItem[]>([
         { amount: '2', ingredient: 'eggs' },
         { amount: '1 cup', ingredient: 'milk' },
         { amount: '2 tbsp', ingredient: 'butter' },
         { ingredient: 'Salt and pepper to taste' },
         { ingredient: 'Fresh herbs (optional)' },
     ]);
-    const [directions, setDirections] = useState<DirectionItem[]>([
+    const [directions] = useState<DirectionItem[]>([
         { step: 'Heat butter in a non-stick pan over medium heat.' },
         { step: 'Whisk eggs with milk and seasonings in a bowl.' },
         { step: 'Pour the egg mixture into the pan.', notes: ['Make sure the eggs are evenly distributed in the pan.'] },
