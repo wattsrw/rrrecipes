@@ -10,8 +10,12 @@ function Home() {
 
     // Category name to icon mapping
     const categoryIconMap: Record<string, string> = {
+        'bread': '🍞',
+        'cookies': '🍪',
         'grill': '🔥',
+        'ice-cream': '🍨',
         'meat': '🥩',
+        'soup': '🍲',
     };
 
     return (

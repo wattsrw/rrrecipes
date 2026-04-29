@@ -24,6 +24,7 @@ After the new category/recipe has been added. Run
 npm run generate-routes
 ```
 
+If adding a category, maybe add the category and icon to `categoryIdonMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
 
 ## Next Commands
 - parse the contents into Ingredients and Directions.
@@ -37,7 +38,7 @@ npm run generate-routes
     - has 1 empty line
     - has line ## Directions
 - In the Directions, accent every occurrance of an 'ingredient' with bold and primary color
-- Update 'categoryIconMap' to account for all of the keys in RECIPE_MAPPING
+
 
 ## TODOs
 - In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
@@ -68,7 +69,7 @@ npm run generate-routes
 - ice cream
     - chocolate
     - vanilla
-- baking
+- cookies
     - chocolate chip cookies
     - hamatachen
 - bread
