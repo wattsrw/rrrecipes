@@ -46,6 +46,7 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 
 
 ## TODOs
+- In mobile, category tiles display icon on left side, smaller and inline
 - In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
 - In the directions, a step is clickable to highlight which step we're on?
 - In the ingredients, a line is clickable to highlight the ingredient?
@@ -53,6 +54,13 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
         - divider?
         - alternating colors?
 - update/add functionality that creates an issue in github repo
+- command to create recipe templates
+    - takes directory input (snakeifies-it)
+    - creates directory if it doesn't exist
+    - takes recipe name (snakeifies-it)
+    - error if it exists
+    - creates .md file with placeholders
+- Include emphasis (bold) in directions (time settings, temperatures, etc.)
 - search
 - breadcrumbs
 
@@ -60,18 +68,10 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 ## Structure
 - meat
     - burgers
-    - salmon
-    - chicken thighs
-    - steak
-    - chicken breasts
 - soup
     - mushroom soup
     - chili
     - borsh
-- grilling
-    - burgers
-    - chicken thighs
-    - potatoes
 - ice cream
     - chocolate
     - vanilla

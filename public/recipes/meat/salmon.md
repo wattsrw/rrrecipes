@@ -1,7 +1,8 @@
 ## Ingredients
-- 2 lbs     Salmon filets
-- canola oil
-- salt and pepper
+- Salmon
+    - 2 lbs
+- Canola oil
+- Salt and pepper
 
 ## Directions
 1. Preheat oven to 375 degrees
