@@ -114,6 +114,7 @@ function Recipe() {
                     <Box sx={{
                         padding: '1rem',
                         borderRadius: '8px',
+                        marginBottom: '2rem',
                     }}
                     >
                         <Typography level="h2" sx={{ marginBottom: '1rem' }}>

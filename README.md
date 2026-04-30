@@ -47,6 +47,7 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
     - accent every other line?
         - divider?
         - alternating colors?
+- update/add functionality that creates an issue in github repo
 - search
 - breadcrumbs
 
