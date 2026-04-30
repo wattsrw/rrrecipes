@@ -19,10 +19,15 @@ All recipes are stored in [/public/recipes](https://github.com/wattsrw/rrrecipes
 ```
 
 ### Update Webpage
-After the new category/recipe has been added. Run
-```
-npm run generate-routes
-```
+After the new category/recipe has been added. Run two commands:
+1. To validate that all recipe markdown files are of the correct format:
+    ```
+    npm run validate-recipes
+    ```
+1. To generate all the category and recipe routes
+    ```
+    npm run generate-routes
+    ```
 
 If adding a category, maybe add the category and icon to `categoryIdonMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
 
