@@ -21,11 +21,11 @@ All recipes are stored in [/public/recipes](https://github.com/wattsrw/rrrecipes
 ### Update Webpage
 After the new category/recipe has been added. Run two commands:
 1. To validate that all recipe markdown files are of the correct format:
-    ```
+    ```bash
     npm run validate-recipes
     ```
 1. To generate all the category and recipe routes
-    ```
+    ```bash
     npm run generate-routes
     ```
 
@@ -38,8 +38,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
         - If there is no tab, then there is no 'amount'
     - Directions should be a List of a new object. Each object has a step(string) and optional notes (List of strings)
     - Optional "## Wait time" top banner about lead time
-    - Optional Notes at bottom? Secondary color background?
-        - any additional header in the .md is a header
 - command to verify all recipe files match stucture
     - file names use snake-naming-convention
     - first line is ## Ingredients
@@ -65,10 +63,12 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
     - creates .md file with placeholders
 - Include emphasis (bold) in directions (time settings, temperatures, etc.)
 - search
-- breadcrumbs
+- breadcrumbs (as title??)
+- put validate markdown files and generate routes commands into action?
+- update `copilot-instructions.md`
 
 
-## Structure
+## Recipes to add
 - soup
     - mushroom soup
     - borsh

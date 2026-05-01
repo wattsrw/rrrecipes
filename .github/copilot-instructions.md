@@ -41,6 +41,11 @@ npm run lint
 npm run preview
 ```
 
+**Generate routes:**
+```bash
+npm run generate-routes
+```
+
 ### Project Structure
 - `/src` - React components and application code
 - `/public` - Static assets
