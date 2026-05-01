@@ -78,7 +78,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 - cookies
     - mom's holiday cookie
 - bread
-    - rye
     - french
     - banana
     - cornbread
