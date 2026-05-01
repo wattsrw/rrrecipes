@@ -37,6 +37,9 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
         - Use split on tab to separate 'amount' from 'ingredient'.
         - If there is no tab, then there is no 'amount'
     - Directions should be a List of a new object. Each object has a step(string) and optional notes (List of strings)
+    - Optional "## Wait time" top banner about lead time
+    - Optional Notes at bottom? Secondary color background?
+        - any additional header in the .md is a header
 - command to verify all recipe files match stucture
     - file names use snake-naming-convention
     - first line is ## Ingredients
@@ -66,18 +69,14 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 
 
 ## Structure
-- meat
-    - burgers
 - soup
     - mushroom soup
-    - chili
     - borsh
 - ice cream
     - chocolate
     - vanilla
 - cookies
-    - chocolate chip cookies
-    - hamatachen
+    - mom's holiday cookie
 - bread
     - rye
     - french

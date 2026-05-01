@@ -1,7 +1,7 @@
 ## Ingredients
 - Salmon
     - 2 lbs
-- Canola oil
+- Oil
 - Salt and pepper
 
 ## Directions

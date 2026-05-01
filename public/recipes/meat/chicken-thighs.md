@@ -1,7 +1,7 @@
 ## Ingredients
 - Chicken thighs
 - Oil
-- seasoning
+- Seasoning
 
 ## Directions
 1. Heat oven to 425 degrees
