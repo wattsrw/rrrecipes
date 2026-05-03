@@ -38,7 +38,7 @@
 1. Grasp the bottom part of the circle and fold it upward to create a third flap and complete the triangle. When you fold this flap up, be sure to tuck the left side of this new flap underneath the left side of the triangle, while letting the right side of this new flap overlap the right side of the triangle. 
     - This way, each side of your triangle has a corner that folds over and a corner that folds under. It creates a "pinwheel" effect. This method if folding is not only pretty, it will help to keep the cookies from opening while they bake.
 1. Pinch each corner of the triangle gently but firmly to secure the shape. If any cracks have formed at the places where the dough is creased, use the warmth of your fingers to smooth them out.
-1. When all of your hamantaschen have been filled, place them on a lightly greased baking sheet, evenly spaced.
+1. When all of your hamantaschen have been filled, place them on a baking sheet with parchment paper, evenly spaced.
 1. Place them in the oven and let them bake for 10-25 minutes, until the cookies are cooked through and lightly golden. Start checking them at 10 minutes. In most ovens it will take around 15-20 minutes, but best to keep a close watch over them as they cook to avoid overcooking or burning.
 1. Cool the cookies on a wire rack.
 
