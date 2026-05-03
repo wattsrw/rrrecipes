@@ -1,32 +1,24 @@
 ## Ingredients
 - Water
-    - 1.5 cups
-- Unsalted butter
+    - 1.25 cups
+- Butter
     - 3 tablespoons
-- Light brown sugar
-    - 4 tablesppons
-- Molasses
-    - 2 tablespoons
-- Cocoa powder unsweetened
-    - 1.5 tablespoons
-- Caraway seeds
-    - 1 teaspoon
 - Salt
-    - 1.5 teaspoons
+    - 1/2 teaspoon
+- Milk powder
+    - 4 tablespoons
 - Bread flour
-    - 2 cups
-- Rye Flour
-    - 2 cups
+    - 3 cups
 - Yeast
-    - 1.5 teaspoons
+    - 1 teaspoon
 
 ## Directions
 1. Pour water into bread bucket
 1. Add other ingredients to bucket
     - Add flour and then yeast last
 1. Put bucket into bread machine
-1. Menu option #1 (Soft Bread)
-1. Light color
+1. Menu option #4 (French)
+1. Medium color
 1. Largest loaf size
 1. Start machine
 1. Let cool in machine for a bit

@@ -33,3 +33,4 @@
 
 ## Wait times
 - 1-2 hours before starting for butter to soften
+- Dough can be refrigerated before baking
