@@ -15,6 +15,7 @@ function Home() {
         'grill': '🔥',
         'ice-cream': '🍨',
         'meat': '🥩',
+        'sandwich': '🥪',
         'soup': '🍲',
     };
 
