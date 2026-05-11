@@ -144,7 +144,7 @@ function Recipe() {
                             {directions.map((dir, index) => (
                                 <ListItem
                                     key={index}
-                                    onClick={() => setSelectedStep(selectedStep === index ? null : index)}
+                                    onClick={() => setSelectedStep(index)}
                                     sx={selectedStep === index ? {
                                         backgroundColor: 'success.50',
                                         borderLeft: '3px solid',
