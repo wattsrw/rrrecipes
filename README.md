@@ -62,6 +62,7 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 - soup
     - mushroom soup
     - borsh
+- latkes
 - ice cream
     - chocolate
     - vanilla

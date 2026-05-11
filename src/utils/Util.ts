@@ -188,20 +188,7 @@ function highlightIngredientsInPart(
                 )
             );
         } else {
-            // Check if token contains bold text (**text**)
-            if (token.includes('**')) {
-                const boldParts = token.split(/(\*\*[^*]+\*\*)/);
-                boldParts.forEach((part, idx) => {
-                    if (part.startsWith('**') && part.endsWith('**')) {
-                        const boldContent = part.slice(2, -2);
-                        result.push(React.createElement('strong', { key: `bold-${matchId++}` }, boldContent));
-                    } else {
-                        result.push(part);
-                    }
-                });
-            } else {
-                result.push(token);
-            }
+            result.push(token);
         }
     }
 
