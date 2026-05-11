@@ -64,7 +64,8 @@ const MODIFIER_WORDS = new Set([
 
 export function highlightIngredientsInText(
     text: string,
-    ingredients: string[]
+    ingredients: string[],
+    onIngredientClick?: (ingredient: string) => void
 ): React.ReactNode {
     if (!ingredients.length) return text;
 
@@ -119,12 +120,37 @@ export function highlightIngredientsInText(
             (multiWordIngredientWords.has(tokenLower) || multiWordIngredientWords.has(singularForm));
 
         if (matchesSingleWord || matchesMultiWord) {
+            // Find the actual ingredient name that matches
+            let ingredientName = ingredients.find(ing => {
+                const ingLower = ing.toLowerCase();
+                return ingLower === tokenLower || ingLower === singularForm;
+            });
+
+            // If not found exactly, try matching by word
+            if (!ingredientName) {
+                ingredientName = ingredients.find(ing => {
+                    const words = ing.toLowerCase().split(/\s+/);
+                    return words.some(word => word === tokenLower || singularize(word) === singularForm);
+                });
+            }
+
             result.push(
                 React.createElement(
-                    'strong',
+                    'button',
                     {
                         key: `ingredient-${matchId++}`,
-                        style: { color: 'var(--joy-palette-primary-500)' }
+                        onClick: () => ingredientName && onIngredientClick?.(ingredientName),
+                        style: {
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            fontWeight: 'bold',
+                            color: 'var(--joy-palette-primary-500)',
+                            cursor: 'pointer',
+                            fontSize: 'inherit',
+                            fontFamily: 'inherit',
+                        },
+                        type: 'button',
                     },
                     token
                 )

@@ -12,9 +12,10 @@ export interface IngredientSection {
 
 interface IngredientListProps {
     ingredients: IngredientSection[];
+    selectedIngredient?: string | null;
 }
 
-function IngredientList({ ingredients }: IngredientListProps) {
+function IngredientList({ ingredients, selectedIngredient }: IngredientListProps) {
     return (
         <>
             <Typography level="h2" sx={{ marginBottom: '1rem' }}>
@@ -28,20 +29,30 @@ function IngredientList({ ingredients }: IngredientListProps) {
                         </Typography>
                     )}
                     <List sx={{ paddingLeft: '1rem' }}>
-                        {section.items.map((item, index) => (
-                            <ListItem key={index}>
-                                <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
-                                    {item.amount && (
-                                        <Box sx={{ minWidth: '110px' }}>
-                                            {item.amount}
+                        {section.items.map((item, index) => {
+                            const isSelected = selectedIngredient?.toLowerCase() === item.ingredient.toLowerCase();
+                            return (
+                                <ListItem
+                                    key={index}
+                                    sx={isSelected ? {
+                                        backgroundColor: 'primary.50',
+                                        borderLeft: '3px solid',
+                                        borderColor: 'primary.500',
+                                    } : {}}
+                                >
+                                    <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
+                                        {item.amount && (
+                                            <Box sx={isSelected ? { minWidth: '110px', fontWeight: 'bold', color: 'primary.500' } : { minWidth: '110px' }}>
+                                                {item.amount}
+                                            </Box>
+                                        )}
+                                        <Box sx={isSelected ? { fontWeight: 'bold', color: 'primary.500' } : {}}>
+                                            {item.ingredient}
                                         </Box>
-                                    )}
-                                    <Box>
-                                        {item.ingredient}
                                     </Box>
-                                </Box>
-                            </ListItem>
-                        ))}
+                                </ListItem>
+                            );
+                        })}
                     </List>
                 </Box>
             ))}

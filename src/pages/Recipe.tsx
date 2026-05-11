@@ -12,11 +12,21 @@ function Recipe() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
     const [directions, setDirections] = useState<DirectionItem[]>([]);
+    const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
 
     // Extract all ingredient names for highlighting
     const ingredientNames = useMemo(() => {
         return ingredients.flatMap(section => section.items.map(item => item.ingredient));
     }, [ingredients]);
+
+    // Handle ingredient click from directions
+    const handleIngredientClick = (ingredientName: string) => {
+        setSelectedIngredient(ingredientName);
+        // Only open drawer on mobile (viewport < md breakpoint of 900px)
+        if (window.innerWidth < 900) {
+            setDrawerOpen(true);
+        }
+    };
 
     // Load and read the markdown file
     useEffect(() => {
@@ -76,7 +86,7 @@ function Recipe() {
                         overflow: 'auto',
                     }}
                 >
-                    <IngredientList ingredients={ingredients} />
+                    <IngredientList ingredients={ingredients} selectedIngredient={selectedIngredient} />
                 </Box>
             </Drawer>
 
@@ -91,7 +101,7 @@ function Recipe() {
                             height: 'fit-content',
                         }}
                     >
-                        <IngredientList ingredients={ingredients} />
+                        <IngredientList ingredients={ingredients} selectedIngredient={selectedIngredient} />
                     </Box>
                 </Grid>
 
@@ -109,12 +119,12 @@ function Recipe() {
                         <List component="ol" marker="decimal" sx={{ paddingLeft: '1.5rem' }}>
                             {directions.map((dir, index) => (
                                 <ListItem key={index}>
-                                    {highlightIngredientsInText(dir.step, ingredientNames)}
+                                    {highlightIngredientsInText(dir.step, ingredientNames, handleIngredientClick)}
                                     {dir.notes && (
                                         <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', paddingTop: '0', paddingBottom: '0' }}>
                                             {dir.notes.map((note, noteIndex) => (
                                                 <ListItem key={noteIndex}>
-                                                    {highlightIngredientsInText(note, ingredientNames)}
+                                                    {highlightIngredientsInText(note, ingredientNames, handleIngredientClick)}
                                                 </ListItem>
                                             ))}
                                         </List>
