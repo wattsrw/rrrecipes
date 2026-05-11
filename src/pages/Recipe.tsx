@@ -4,38 +4,14 @@ import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug } from '../utils/Util';
 import IngredientList, { type IngredientSection } from '../components/IngredientList';
-
-interface DirectionItem {
-    step: string;
-    notes?: string[]
-}
+import { parseRecipeMarkdown, type DirectionItem } from '../utils/MarkdownParser';
 
 function Recipe() {
     const { category, recipe } = useParams<{ category: string; recipe: string }>();
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [ingredients] = useState<IngredientSection[]>([{
-        title: 'Main Ingredients',
-        items: [
-            { amount: '2', ingredient: 'eggs' },
-            { amount: '1 cup', ingredient: 'milk' },
-            { amount: '2 tbsp', ingredient: 'butter' },
-            { ingredient: 'Salt and pepper to taste' },
-            { ingredient: 'Fresh herbs (optional)' },
-        ]
-    }]);
-    const [directions] = useState<DirectionItem[]>([
-        { step: 'Heat butter in a non-stick pan over medium heat.' },
-        { step: 'Whisk eggs with milk and seasonings in a bowl.' },
-        { step: 'Pour the egg mixture into the pan.', notes: ['Make sure the eggs are evenly distributed in the pan.'] },
-        { step: 'Stir gently until eggs are cooked through, about 3-4 minutes.' },
-        { step: 'Serve immediately and garnish with fresh herbs if desired.' },
-        { step: 'Heat butter in a non-stick pan over medium heat.' },
-        { step: 'Whisk eggs with milk and seasonings in a bowl.', notes: ['Make sure the eggs are evenly distributed in the pan.', 'Ensure the mixture is well combined.'] },
-        { step: 'Pour the egg mixture into the pan.' },
-        { step: 'Stir gently until eggs are cooked through, about 3-4 minutes.' },
-        { step: 'Serve immediately and garnish with fresh herbs if desired.' },
-    ]);
+    const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
+    const [directions, setDirections] = useState<DirectionItem[]>([]);
 
     // Load and read the markdown file
     useEffect(() => {
@@ -48,7 +24,9 @@ function Recipe() {
                 const response = await fetch(mdPath);
                 if (response.ok) {
                     const content = await response.text();
-                    console.log(`Contents of ${category}/${recipe}.md:`, content);
+                    const parsed = parseRecipeMarkdown(content);
+                    setIngredients(parsed.ingredients);
+                    setDirections(parsed.directions);
                 } else {
                     console.warn(`Markdown file not found: ${mdPath}`);
                 }
@@ -128,7 +106,7 @@ function Recipe() {
                                 <ListItem key={index}>
                                     {dir.step}
                                     {dir.notes && (
-                                        <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                                        <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', paddingTop: '0', paddingBottom: '0' }}>
                                             {dir.notes.map((note, noteIndex) => (
                                                 <ListItem key={noteIndex}>
                                                     {note}

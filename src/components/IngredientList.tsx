@@ -32,7 +32,7 @@ function IngredientList({ ingredients }: IngredientListProps) {
                             <ListItem key={index}>
                                 <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
                                     {item.amount && (
-                                        <Box sx={{ minWidth: '80px' }}>
+                                        <Box sx={{ minWidth: '100px' }}>
                                             {item.amount}
                                         </Box>
                                     )}

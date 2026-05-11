@@ -32,12 +32,6 @@ After the new category/recipe has been added. Run two commands:
 If adding a category, maybe add the category and icon to `categoryIdonMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
 
 ## Next Commands
-- parse the contents into Ingredients and Directions.
-    - Ingredients should be a list of Ingredient objects from IngredientList.tsx. 
-        - Use split on tab to separate 'amount' from 'ingredient'.
-        - If there is no tab, then there is no 'amount'
-    - Directions should be a List of a new object. Each object has a step(string) and optional notes (List of strings)
-    - Optional "## Wait time" top banner about lead time
 - command to verify all recipe files match stucture
     - file names use snake-naming-convention
     - first line is ## Ingredients
@@ -47,7 +41,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 
 
 ## TODOs
-- support ingredients and headers have subheaders for different sections
 - In mobile, category tiles display icon on left side, smaller and inline
 - In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
 - In the directions, a step is clickable to highlight which step we're on?
