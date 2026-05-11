@@ -1,6 +1,7 @@
-import { Box, Stack, Typography, Divider, type BoxProps } from '@mui/joy';
+import { Box, Stack, Typography, Divider, IconButton, type BoxProps } from '@mui/joy';
 import React from 'react';
 import { FONT_COLOR } from '../theme';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface LayoutProps extends BoxProps {
     children: React.ReactNode;
@@ -21,7 +22,16 @@ function Layout({ children, title, ...props }: LayoutProps) {
             <Stack spacing={2}>
                 {title && (
                     <>
-                        <Typography level="h1">{title}</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography level="h1">{title}</Typography>
+                            <IconButton
+                                onClick={() => window.open('https://docs.google.com/forms/d/e/fake-form-id/viewform', '_blank')}
+                                variant="plain"
+                                color="primary"
+                            >
+                                <EditIcon />
+                            </IconButton>
+                        </Box>
                         <Divider sx={{ borderColor: FONT_COLOR }} />
                     </>
                 )}
