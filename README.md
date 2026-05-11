@@ -13,9 +13,9 @@ All recipes are stored in [/public/recipes](https://github.com/wattsrw/rrrecipes
 
 ## Direction
 1. Warm oven to 375 degrees // Ordered list item
-2. Put chicken on pan
+1. Put chicken on pan
     - Skin side up // Optional notes about step
-3. Cook
+1. Cook
 ```
 
 ### Update Webpage
@@ -47,6 +47,7 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
 
 
 ## TODOs
+- support ingredients and headers have subheaders for different sections
 - In mobile, category tiles display icon on left side, smaller and inline
 - In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
 - In the directions, a step is clickable to highlight which step we're on?
