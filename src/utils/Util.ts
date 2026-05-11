@@ -9,51 +9,130 @@ export function formatTitleFromSlug(slug?: string): string {
         .join(' ');
 }
 
+/**
+ * Singularize a word (basic implementation for common cases)
+ * This is maintainable and can be extended for edge cases over time
+ */
+function singularize(word: string): string {
+    const lower = word.toLowerCase();
+
+    // Common plural rules (in order of specificity)
+    if (lower.endsWith('ies')) return lower.slice(0, -3) + 'y';
+    if (lower.endsWith('xes') || lower.endsWith('zes') || lower.endsWith('ches') || lower.endsWith('shes')) {
+        return lower.slice(0, -2);
+    }
+    if (lower.endsWith('es')) return lower.slice(0, -2);
+    if (lower.endsWith('s') && !lower.endsWith('ss')) return lower.slice(0, -1);
+
+    return lower;
+}
+
+/**
+ * Words that are modifiers/descriptors and shouldn't be highlighted on their own
+ * This list can be extended as edge cases are discovered
+ */
+const MODIFIER_WORDS = new Set([
+    'light',
+    'dark',
+    'heavy',
+    'brown',
+    'white',
+    'yellow',
+    'red',
+    'green',
+    'unsalted',
+    'salted',
+    'sweetened',
+    'unsweetened',
+    'fresh',
+    'dried',
+    'ground',
+    'whole',
+    'granulated',
+    'powdered',
+    'all-purpose',
+    'extra-virgin',
+    'raw',
+    'cooked',
+    'roasted',
+    'toasted',
+    'sliced',
+    'chopped',
+    'minced',
+    'baking',
+]);
+
 export function highlightIngredientsInText(
     text: string,
     ingredients: string[]
 ): React.ReactNode {
     if (!ingredients.length) return text;
 
-    // Sort by length (longest first) to avoid partial matches
-    const sortedIngredients = [...ingredients].sort((a, b) => b.length - a.length);
+    // Build a set of all "ingredient keywords" for quick lookup
+    // Separate single-word ingredients from multi-word ingredients
+    const singleWordIngredients = new Set<string>();
+    const multiWordIngredientWords = new Set<string>();
 
-    // Create a regex pattern that matches any ingredient (case-insensitive, word boundaries)
-    const pattern = sortedIngredients
-        .map(ing => ing.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) // Escape special regex chars
-        .join('|');
+    ingredients.forEach(ingredient => {
+        const ingredientLower = ingredient.toLowerCase();
+        const words = ingredientLower.split(/\s+/);
 
-    const regex = new RegExp(`\\b(${pattern})\\b`, 'gi');
+        if (words.length === 1) {
+            // Single-word ingredient: add it and its singular form
+            singleWordIngredients.add(ingredientLower);
+            singleWordIngredients.add(singularize(ingredientLower));
+        } else {
+            // Multi-word ingredient: add full name and individual words (excluding modifiers)
+            singleWordIngredients.add(ingredientLower); // Full name always matches
 
-    const parts: React.ReactNode[] = [];
-    let lastIndex = 0;
-    let match;
+            words.forEach(word => {
+                // Only add individual words if they're not modifiers
+                if (!MODIFIER_WORDS.has(word)) {
+                    multiWordIngredientWords.add(word);
+                    multiWordIngredientWords.add(singularize(word));
+                }
+            });
+        }
+    });
 
-    while ((match = regex.exec(text)) !== null) {
-        // Add text before the match
-        if (match.index > lastIndex) {
-            parts.push(text.substring(lastIndex, match.index));
+    // Split text into tokens (words, whitespace, punctuation)
+    const tokens = text.split(/(\s+|[,.!?;:])/);
+    const result: React.ReactNode[] = [];
+    let matchId = 0;
+
+    for (const token of tokens) {
+        // Keep whitespace and punctuation as is
+        if (!token.trim()) {
+            result.push(token);
+            continue;
         }
 
-        // Add highlighted ingredient
-        parts.push(
-            React.createElement(
-                'strong',
-                {
-                    key: `ingredient-${match.index}`,
-                    style: { color: 'var(--joy-palette-primary-500)' }
-                },
-                match[0]
-            )
-        );
+        // Check if this token matches any ingredient keyword
+        const tokenLower = token.toLowerCase();
+        const singularForm = singularize(tokenLower);
 
-        lastIndex = match.index + match[0].length;
+        // Check single-word ingredients first (exact matches have priority)
+        const matchesSingleWord = singleWordIngredients.has(tokenLower) || singleWordIngredients.has(singularForm);
+
+        // Then check multi-word ingredient words (only if not a modifier)
+        const matchesMultiWord = !MODIFIER_WORDS.has(tokenLower) &&
+            (multiWordIngredientWords.has(tokenLower) || multiWordIngredientWords.has(singularForm));
+
+        if (matchesSingleWord || matchesMultiWord) {
+            result.push(
+                React.createElement(
+                    'strong',
+                    {
+                        key: `ingredient-${matchId++}`,
+                        style: { color: 'var(--joy-palette-primary-500)' }
+                    },
+                    token
+                )
+            );
+        } else {
+            result.push(token);
+        }
     }
 
-    // Add remaining text
-    if (lastIndex < text.length) {
-        parts.push(text.substring(lastIndex));
-    }
-
-    return parts.length > 0 ? parts : text;
+    return result;
 }
