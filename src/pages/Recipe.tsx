@@ -1,8 +1,8 @@
 import { Grid, Typography, Box, Button, Drawer, List, ListItem } from '@mui/joy';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { formatTitleFromSlug } from '../utils/Util';
+import { formatTitleFromSlug, highlightIngredientsInText } from '../utils/Util';
 import IngredientList, { type IngredientSection } from '../components/IngredientList';
 import { parseRecipeMarkdown, type DirectionItem } from '../utils/MarkdownParser';
 
@@ -12,6 +12,11 @@ function Recipe() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
     const [directions, setDirections] = useState<DirectionItem[]>([]);
+
+    // Extract all ingredient names for highlighting
+    const ingredientNames = useMemo(() => {
+        return ingredients.flatMap(section => section.items.map(item => item.ingredient));
+    }, [ingredients]);
 
     // Load and read the markdown file
     useEffect(() => {
@@ -104,12 +109,12 @@ function Recipe() {
                         <List component="ol" marker="decimal" sx={{ paddingLeft: '1.5rem' }}>
                             {directions.map((dir, index) => (
                                 <ListItem key={index}>
-                                    {dir.step}
+                                    {highlightIngredientsInText(dir.step, ingredientNames)}
                                     {dir.notes && (
                                         <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', paddingTop: '0', paddingBottom: '0' }}>
                                             {dir.notes.map((note, noteIndex) => (
                                                 <ListItem key={noteIndex}>
-                                                    {note}
+                                                    {highlightIngredientsInText(note, ingredientNames)}
                                                 </ListItem>
                                             ))}
                                         </List>
