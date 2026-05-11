@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-routes": "node scripts/generate-routes.js"
+    "generate-routes": "node scripts/generate-routes.js",
+    "create-recipe": "node scripts/create-recipe.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

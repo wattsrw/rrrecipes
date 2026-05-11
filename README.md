@@ -1,35 +1,25 @@
 # RRRecipes
 
 ## To Add a New Recipe
-All recipes are stored in [/public/recipes](https://github.com/wattsrw/rrrecipes/tree/main/public/recipes). Categories are kept as directories. Recipes are kept as markdown files. All directory and file names should use snake-naming-convention.
-
-### Recipe Markdown Structure
-```markdown
-## Ingredients
-- Salt // Unordered list item
-    - 1 tsp // Optional amount
-- Chicken
-- Canola oil
-
-## Direction
-1. Warm oven to 375 degrees // Ordered list item
-1. Put chicken on pan
-    - Skin side up // Optional notes about step
-1. Cook
+1. Run the following command and follow the prompts:
+```bash
+npm run create-recipe
+```
+or with category and recipe names as arguments:
+```bash
+npm run create-recipe "bread" "sourdough"
 ```
 
-### Update Webpage
-After the new category/recipe has been added. Run two commands:
-1. To validate that all recipe markdown files are of the correct format:
-    ```bash
-    npm run validate-recipes
-    ```
-1. To generate all the category and recipe routes
-    ```bash
-    npm run generate-routes
-    ```
+2. All recipes are stored in [/public/recipes](https://github.com/wattsrw/rrrecipes/tree/main/public/recipes). Categories are kept as directories. Recipes are kept as markdown files. Edit the new markdown file to add your ingredients, directions, and wait times
 
-If adding a category, maybe add the category and icon to `categoryIdonMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
+### Update Webpage
+After the new category/recipe has been added, run the following command to generate all the category and recipe routes:
+```bash
+npm run generate-routes
+```
+
+If adding a new category, you may also want to add the category and icon to `categoryIconMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
+
 
 ## Next Commands
 - command to verify all recipe files match stucture
@@ -38,7 +28,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
     - has 1 empty line
     - has line ## Directions
 
-
 ## TODOs
 - In mobile, category tiles display icon on left side, smaller and inline
 - In the ingredients, a line is clickable to highlight the ingredient?
@@ -46,12 +35,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
         - divider?
         - alternating colors?
 - update/add functionality that creates an issue in github repo
-- command to create recipe templates
-    - takes directory input (snakeifies-it)
-    - creates directory if it doesn't exist
-    - takes recipe name (snakeifies-it)
-    - error if it exists
-    - creates .md file with placeholders
 - search
 - breadcrumbs (as title??)
 - put validate markdown files and generate routes commands into action?
