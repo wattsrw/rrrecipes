@@ -36,6 +36,7 @@ const theme = extendTheme({
                 },
                 text: {
                     primary: FONT_COLOR,
+                    icon: FONT_COLOR,
                 },
             },
         },

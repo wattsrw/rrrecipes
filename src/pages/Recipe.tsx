@@ -1,6 +1,7 @@
 import { Grid, Typography, Box, Button, Drawer, List, ListItem } from '@mui/joy';
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug, highlightIngredientsInText, renderBoldText } from '../utils/Util';
 import IngredientList, { type IngredientSection } from '../components/IngredientList';
@@ -103,9 +104,14 @@ function Recipe() {
                         marginBottom: '1.5rem',
                     }}
                 >
-                    <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
-                        Wait Times
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                        <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
+                            <AccessTimeIcon />
+                        </Box>
+                        <Typography level="h3">
+                            Wait Times
+                        </Typography>
+                    </Box>
                     <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
                         {waitTimes.map((waitTime, index) => (
                             <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
