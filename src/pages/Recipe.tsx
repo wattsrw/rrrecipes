@@ -13,6 +13,7 @@ function Recipe() {
     const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
     const [directions, setDirections] = useState<DirectionItem[]>([]);
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+    const [selectedStep, setSelectedStep] = useState<number | null>(null);
 
     // Extract all ingredient names for highlighting
     const ingredientNames = useMemo(() => {
@@ -118,12 +119,28 @@ function Recipe() {
                         </Typography>
                         <List component="ol" marker="decimal" sx={{ paddingLeft: '1.5rem' }}>
                             {directions.map((dir, index) => (
-                                <ListItem key={index}>
+                                <ListItem
+                                    key={index}
+                                    onClick={() => setSelectedStep(selectedStep === index ? null : index)}
+                                    sx={selectedStep === index ? {
+                                        backgroundColor: 'success.50',
+                                        borderLeft: '3px solid',
+                                        borderColor: 'success.500',
+                                        color: 'success.500',
+                                        cursor: 'pointer',
+                                    } : { cursor: 'pointer' }}
+                                >
                                     {highlightIngredientsInText(dir.step, ingredientNames, handleIngredientClick)}
                                     {dir.notes && (
                                         <List component="ul" marker="disc" sx={{ paddingLeft: '1.5rem', paddingTop: '0', paddingBottom: '0' }}>
                                             {dir.notes.map((note, noteIndex) => (
-                                                <ListItem key={noteIndex}>
+                                                <ListItem
+                                                    key={noteIndex}
+                                                    sx={selectedStep === index ? {
+                                                        backgroundColor: 'success.50',
+                                                        color: 'success.500',
+                                                    } : {}}
+                                                >
                                                     {highlightIngredientsInText(note, ingredientNames, handleIngredientClick)}
                                                 </ListItem>
                                             ))}
