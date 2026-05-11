@@ -1,36 +1,50 @@
 import { Typography, List, ListItem, Box } from '@mui/joy';
 
-export interface IngredientItem {
+interface IngredientItem {
     amount?: string;
     ingredient: string;
 }
 
-interface IngredientListProps {
+export interface IngredientSection {
+    title?: string
     items: IngredientItem[];
 }
 
-function IngredientList({ items }: IngredientListProps) {
+interface IngredientListProps {
+    ingredients: IngredientSection[];
+}
+
+function IngredientList({ ingredients }: IngredientListProps) {
     return (
         <>
             <Typography level="h2" sx={{ marginBottom: '1rem' }}>
                 Ingredients
             </Typography>
-            <List sx={{ paddingLeft: '1.5rem' }}>
-                {items.map((item, index) => (
-                    <ListItem key={index}>
-                        <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
-                            {item.amount && (
-                                <Box sx={{ minWidth: '80px' }}>
-                                    {item.amount}
+            {ingredients.map((section, sectionIndex) => (
+                <Box key={sectionIndex} sx={{ marginBottom: '1.5rem' }}>
+                    {section.title && (
+                        <Typography level="h4" >
+                            {section.title}
+                        </Typography>
+                    )}
+                    <List sx={{ paddingLeft: '1.5rem' }}>
+                        {section.items.map((item, index) => (
+                            <ListItem key={index}>
+                                <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
+                                    {item.amount && (
+                                        <Box sx={{ minWidth: '80px' }}>
+                                            {item.amount}
+                                        </Box>
+                                    )}
+                                    <Box>
+                                        {item.ingredient}
+                                    </Box>
                                 </Box>
-                            )}
-                            <Box>
-                                {item.ingredient}
-                            </Box>
-                        </Box>
-                    </ListItem>
-                ))}
-            </List>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
+            ))}
         </>
     );
 }

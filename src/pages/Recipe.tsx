@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug } from '../utils/Util';
-import IngredientList, { type IngredientItem } from '../components/IngredientList';
+import IngredientList, { type IngredientSection } from '../components/IngredientList';
 
 interface DirectionItem {
     step: string;
@@ -14,13 +14,16 @@ function Recipe() {
     const { category, recipe } = useParams<{ category: string; recipe: string }>();
     const title = formatTitleFromSlug(recipe);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [ingredients] = useState<IngredientItem[]>([
-        { amount: '2', ingredient: 'eggs' },
-        { amount: '1 cup', ingredient: 'milk' },
-        { amount: '2 tbsp', ingredient: 'butter' },
-        { ingredient: 'Salt and pepper to taste' },
-        { ingredient: 'Fresh herbs (optional)' },
-    ]);
+    const [ingredients] = useState<IngredientSection[]>([{
+        title: 'Main Ingredients',
+        items: [
+            { amount: '2', ingredient: 'eggs' },
+            { amount: '1 cup', ingredient: 'milk' },
+            { amount: '2 tbsp', ingredient: 'butter' },
+            { ingredient: 'Salt and pepper to taste' },
+            { ingredient: 'Fresh herbs (optional)' },
+        ]
+    }]);
     const [directions] = useState<DirectionItem[]>([
         { step: 'Heat butter in a non-stick pan over medium heat.' },
         { step: 'Whisk eggs with milk and seasonings in a bowl.' },
@@ -90,7 +93,7 @@ function Recipe() {
                         overflow: 'auto',
                     }}
                 >
-                    <IngredientList items={ingredients} />
+                    <IngredientList ingredients={ingredients} />
                 </Box>
             </Drawer>
 
@@ -105,7 +108,7 @@ function Recipe() {
                             height: 'fit-content',
                         }}
                     >
-                        <IngredientList items={ingredients} />
+                        <IngredientList ingredients={ingredients} />
                     </Box>
                 </Grid>
 
