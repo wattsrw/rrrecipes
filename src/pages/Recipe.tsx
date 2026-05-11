@@ -2,7 +2,7 @@ import { Grid, Typography, Box, Button, Drawer, List, ListItem } from '@mui/joy'
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { formatTitleFromSlug, highlightIngredientsInText } from '../utils/Util';
+import { formatTitleFromSlug, highlightIngredientsInText, renderBoldText } from '../utils/Util';
 import IngredientList, { type IngredientSection } from '../components/IngredientList';
 import { parseRecipeMarkdown, type DirectionItem } from '../utils/MarkdownParser';
 
@@ -108,7 +108,7 @@ function Recipe() {
                     </Typography>
                     <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
                         {waitTimes.map((waitTime, index) => (
-                            <ListItem key={index}>{waitTime}</ListItem>
+                            <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
                         ))}
                     </List>
                 </Box>

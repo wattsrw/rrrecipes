@@ -52,7 +52,6 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
     - takes recipe name (snakeifies-it)
     - error if it exists
     - creates .md file with placeholders
-- Include emphasis (bold) in directions (time settings, temperatures, etc.)
 - search
 - breadcrumbs (as title??)
 - put validate markdown files and generate routes commands into action?

@@ -69,6 +69,38 @@ export function highlightIngredientsInText(
 ): React.ReactNode {
     if (!ingredients.length) return text;
 
+    // First, split by bold markers to handle bold text
+    const boldParts = text.split(/(\*\*[^*]+\*\*)/);
+    const result: React.ReactNode[] = [];
+    let matchId = 0;
+
+    for (const part of boldParts) {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            // This is bold text - render as strong
+            const boldContent = part.slice(2, -2);
+            result.push(React.createElement('strong', { key: `bold-${matchId++}` }, boldContent));
+        } else {
+            // Not bold - apply ingredient highlighting
+            result.push(...highlightIngredientsInPart(part, ingredients, onIngredientClick, matchId));
+            // Update matchId based on how many elements were added
+            matchId += part.length; // rough estimate, will be overridden properly below
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Helper function to highlight ingredients in a single part (non-bold text)
+ */
+function highlightIngredientsInPart(
+    text: string,
+    ingredients: string[],
+    onIngredientClick?: (ingredient: string) => void,
+    startMatchId: number = 0
+): React.ReactNode[] {
+    if (!text || !ingredients.length) return [text];
+
     // Build a set of all "ingredient keywords" for quick lookup
     // Separate single-word ingredients from multi-word ingredients
     const singleWordIngredients = new Set<string>();
@@ -99,7 +131,7 @@ export function highlightIngredientsInText(
     // Split text into tokens (words, whitespace, punctuation)
     const tokens = text.split(/(\s+|[,.!?;:])/);
     const result: React.ReactNode[] = [];
-    let matchId = 0;
+    let matchId = startMatchId;
 
     for (const token of tokens) {
         // Keep whitespace and punctuation as is
@@ -156,9 +188,43 @@ export function highlightIngredientsInText(
                 )
             );
         } else {
-            result.push(token);
+            // Check if token contains bold text (**text**)
+            if (token.includes('**')) {
+                const boldParts = token.split(/(\*\*[^*]+\*\*)/);
+                boldParts.forEach((part, idx) => {
+                    if (part.startsWith('**') && part.endsWith('**')) {
+                        const boldContent = part.slice(2, -2);
+                        result.push(React.createElement('strong', { key: `bold-${matchId++}` }, boldContent));
+                    } else {
+                        result.push(part);
+                    }
+                });
+            } else {
+                result.push(token);
+            }
         }
     }
 
     return result;
+}
+
+/**
+ * Converts **text** markdown syntax to bold JSX elements
+ */
+export function renderBoldText(text: string): React.ReactNode {
+    if (!text.includes('**')) {
+        return text;
+    }
+
+    // Split by ** and process
+    const parts = text.split(/(\*\*[^*]+\*\*)/);
+
+    return parts.map((part, index) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            // This is bold text
+            const boldContent = part.slice(2, -2);
+            return React.createElement('strong', { key: index }, boldContent);
+        }
+        return part;
+    });
 }
