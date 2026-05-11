@@ -27,12 +27,12 @@ function IngredientList({ ingredients }: IngredientListProps) {
                             {section.title}
                         </Typography>
                     )}
-                    <List sx={{ paddingLeft: '1.5rem' }}>
+                    <List sx={{ paddingLeft: '1rem' }}>
                         {section.items.map((item, index) => (
                             <ListItem key={index}>
                                 <Box sx={{ display: 'flex', gap: '1rem', width: '100%' }}>
                                     {item.amount && (
-                                        <Box sx={{ minWidth: '100px' }}>
+                                        <Box sx={{ minWidth: '110px' }}>
                                             {item.amount}
                                         </Box>
                                     )}
