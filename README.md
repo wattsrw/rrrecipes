@@ -37,13 +37,10 @@ If adding a category, maybe add the category and icon to `categoryIdonMap` in [H
     - first line is ## Ingredients
     - has 1 empty line
     - has line ## Directions
-- In the Directions, accent every occurrance of an 'ingredient' with bold and primary color
 
 
 ## TODOs
 - In mobile, category tiles display icon on left side, smaller and inline
-- In the directions, clicking on an ingredient, opens the ingredient drawer (if on mobile) and highlights the ingredient clicked
-- In the directions, a step is clickable to highlight which step we're on?
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?
         - divider?

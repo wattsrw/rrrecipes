@@ -12,6 +12,7 @@ function Recipe() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
     const [directions, setDirections] = useState<DirectionItem[]>([]);
+    const [waitTimes, setWaitTimes] = useState<string[]>([]);
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [selectedStep, setSelectedStep] = useState<number | null>(null);
 
@@ -43,6 +44,7 @@ function Recipe() {
                     const parsed = parseRecipeMarkdown(content);
                     setIngredients(parsed.ingredients);
                     setDirections(parsed.directions);
+                    setWaitTimes(parsed.waitTimes);
                 } else {
                     console.warn(`Markdown file not found: ${mdPath}`);
                 }
@@ -90,6 +92,27 @@ function Recipe() {
                     <IngredientList ingredients={ingredients} selectedIngredient={selectedIngredient} />
                 </Box>
             </Drawer>
+
+            {/* Wait Times Section */}
+            {waitTimes.length > 0 && (
+                <Box
+                    sx={{
+                        backgroundColor: 'success.50',
+                        padding: '1.5rem',
+                        borderRadius: '8px',
+                        marginBottom: '1.5rem',
+                    }}
+                >
+                    <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
+                        Wait Times
+                    </Typography>
+                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                        {waitTimes.map((waitTime, index) => (
+                            <ListItem key={index}>{waitTime}</ListItem>
+                        ))}
+                    </List>
+                </Box>
+            )}
 
             <Grid container spacing={2}>
                 {/* Ingredients Section - Hidden on mobile */}
