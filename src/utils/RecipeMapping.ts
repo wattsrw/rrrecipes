@@ -25,6 +25,7 @@ export const RECIPE_MAPPING = {
     "salmon",
     "steak"
   ],
+  "muffins": [],
   "sandwich": [
     "grilled-cheese"
   ],
