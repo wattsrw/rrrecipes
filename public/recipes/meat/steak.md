@@ -3,8 +3,8 @@
 - Salt and pepper
 
 ## Directions
-- Season steak on both sides
-- Heat skillet to medium-high
-- Place steaks on skillet and cover
-- Cook steaks 4-5 minutes each side
+1. Season steak on both sides
+1. Heat skillet to medium-high
+1. Place steaks on skillet and cover
+1. Cook steaks 4-5 minutes each side
     - Lean towards 4 minutes

@@ -60,10 +60,25 @@ function validateRecipeContent(filePath, relPath) {
             waitTimes: false,
         };
 
-        for (const line of lines) {
-            if (line.trim() === '## Ingredients') hasSections.ingredients = true;
-            if (line.trim() === '## Directions') hasSections.directions = true;
-            if (line.trim() === '## Wait Times') hasSections.waitTimes = true;
+        const sectionIndices = {
+            ingredients: -1,
+            directions: -1,
+            waitTimes: -1,
+        };
+
+        for (let i = 0; i < lines.length; i++) {
+            if (lines[i].trim() === '## Ingredients') {
+                hasSections.ingredients = true;
+                sectionIndices.ingredients = i;
+            }
+            if (lines[i].trim() === '## Directions') {
+                hasSections.directions = true;
+                sectionIndices.directions = i;
+            }
+            if (lines[i].trim() === '## Wait Times') {
+                hasSections.waitTimes = true;
+                sectionIndices.waitTimes = i;
+            }
         }
 
         // Validate required sections
@@ -94,11 +109,82 @@ function validateRecipeContent(filePath, relPath) {
             return false;
         }
 
+        // Validate list types within sections
+        if (!validateSectionListTypes(lines, sectionIndices, relPath)) {
+            return false;
+        }
+
         return true;
     } catch (error) {
         logError(`Error reading ${relPath}: ${error.message}`);
         return false;
     }
+}
+
+function validateSectionListTypes(lines, sectionIndices, relPath) {
+    // Get section boundaries
+    const ingredientsStart = sectionIndices.ingredients + 1;
+    const ingredientsEnd = sectionIndices.directions;
+    const directionsStart = sectionIndices.directions + 1;
+    const directionsEnd = sectionIndices.waitTimes >= 0 ? sectionIndices.waitTimes : lines.length;
+    const waitTimesStart = sectionIndices.waitTimes >= 0 ? sectionIndices.waitTimes + 1 : -1;
+
+    // Validate Ingredients section (should be unordered lists with `-`)
+    for (let i = ingredientsStart; i < ingredientsEnd; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (!trimmed || trimmed.startsWith('###')) continue; // Skip empty lines and section titles
+
+        if (!line.startsWith('    ') && trimmed && !trimmed.startsWith('-') && !trimmed.startsWith('##')) {
+            logError(`Invalid list item in Ingredients section at ${relPath} (line ${i + 1}): "${trimmed}". Ingredients must be unordered lists (start with "-").`);
+            return false;
+        }
+
+        // Check indented lines (amounts) start with `-`
+        if (line.startsWith('    ') && trimmed && !trimmed.startsWith('-')) {
+            logError(`Invalid sub-item in Ingredients section at ${relPath} (line ${i + 1}): "${trimmed}". Amounts must start with "-".`);
+            return false;
+        }
+    }
+
+    // Validate Directions section (should be ordered lists with `1.`)
+    for (let i = directionsStart; i < directionsEnd; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        if (!trimmed) continue; // Skip empty lines
+
+        if (!line.startsWith('    ') && trimmed && !trimmed.startsWith('##')) {
+            if (!/^\d+\./.test(trimmed)) {
+                logError(`Invalid list item in Directions section at ${relPath} (line ${i + 1}): "${trimmed}". Directions must be ordered lists (start with "1.").`);
+                return false;
+            }
+        }
+
+        // Check indented lines (notes) start with `-`
+        if (line.startsWith('    ') && trimmed && !trimmed.startsWith('-')) {
+            logError(`Invalid note in Directions section at ${relPath} (line ${i + 1}): "${trimmed}". Notes must start with "-".`);
+            return false;
+        }
+    }
+
+    // Validate Wait Times section (should be unordered lists with `-`)
+    if (waitTimesStart >= 0) {
+        for (let i = waitTimesStart; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmed = line.trim();
+
+            if (!trimmed) continue; // Skip empty lines
+
+            if (!trimmed.startsWith('-') && !trimmed.startsWith('##')) {
+                logError(`Invalid list item in Wait Times section at ${relPath} (line ${i + 1}): "${trimmed}". Wait times must be unordered lists (start with "-").`);
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 function validateRecipeStructure(dirPath, relPath, categoryName) {

@@ -37,6 +37,6 @@
     - If coming from fridge, cook time is closer to 12-14 minutes
 1. Let them sit on the baking pan for 5 minutes before removing to cooling rack.
 
-## Wait times
+## Wait Times
 - 1-2 hours before starting for butter to soften
 - Dough can be refrigerated before baking

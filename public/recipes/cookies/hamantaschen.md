@@ -42,6 +42,6 @@
 1. Place them in the oven and let them bake for 10-25 minutes, until the cookies are cooked through and lightly golden. Start checking them at 10 minutes. In most ovens it will take around 15-20 minutes, but best to keep a close watch over them as they cook to avoid overcooking or burning.
 1. Cool the cookies on a wire rack.
 
-## Wait times
+## Wait Times
 - 1-2 hours before starting for butter to soften
 - Dough goes into refrigerator for at least 3 hours before forming cookies and baking
