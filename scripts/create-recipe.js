@@ -12,8 +12,7 @@ function slugify(str) {
         .toLowerCase()
         .trim()
         .replace(/\s+/g, '-') // Replace spaces with hyphens
-        .replace(/[&]/g, 'and') // Replace & with 'and'
-        .replace(/[^\w-]/g, '') // Remove special characters
+        .replace(/[^\w&-]/g, '') // Remove special characters (keep & and hyphens)
         .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
         .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 }

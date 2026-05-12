@@ -3,18 +3,19 @@
 ## Directory Naming Convention
 
 - Category directories must use **kebab-case** (lowercase with hyphens)
-- Example: `bread`, `meat`, `ice-cream`, `cookie` (not `Bread`, `meatDishes`, etc.)
+- Ampersands (`&`) are allowed: `M & M` → `m-&-m`
+- Example: `bread`, `meat`, `ice-cream`, `m-&-m` (not `Bread`, `meatDishes`, etc.)
 - Special characters are converted:
   - Spaces → hyphens: `ice cream` → `ice-cream`
-  - Ampersands → `and`: `M & M` → `m-and-m`
   - All other special characters are removed: `mom's` → `moms`
 
 ## File Naming Convention
 
 - Recipe markdown files must use **kebab-case** (lowercase with hyphens)
+- Ampersands (`&`) are allowed: `m-&-m.md`
 - File extension is always `.md`
-- Examples: `chocolate-chip.md`, `banana-bread.md`, `grilled-cheese.md`
-- The same slugifying rules apply as for directories
+- Examples: `chocolate-chip.md`, `banana-bread.md`, `grilled-cheese.md`, `m-&-m.md`
+- The same rules apply as for directories
 
 ## Directory Structure
 

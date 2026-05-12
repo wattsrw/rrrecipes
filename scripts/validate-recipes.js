@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const recipesDir = path.join(__dirname, '../public/recipes');
 
 // Validation rules
-const KEBAB_CASE_REGEX = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const KEBAB_CASE_REGEX = /^[a-z0-9&]+(-[a-z0-9&]+)*$/;
 const VALID_SECTIONS = ['## Ingredients', '## Directions', '## Wait Times'];
 const REQUIRED_SECTIONS = ['## Ingredients', '## Directions'];
 
