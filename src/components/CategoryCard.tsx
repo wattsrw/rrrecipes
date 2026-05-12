@@ -21,9 +21,36 @@ function CategoryCard({ icon, title, link }: CategoryProps) {
             }}
         >
             <CardContent>
-                <Stack spacing={1} alignItems="center" textAlign="center">
-                    {icon && <div style={{ fontSize: '2rem' }}>{icon}</div>}
-                    <Typography level="body-lg" fontWeight="lg">
+                <Stack
+                    spacing={1}
+                    alignItems="center"
+                    textAlign="center"
+                    sx={{
+                        flexDirection: { xs: 'row', sm: 'column' },
+                        alignItems: { xs: 'center', sm: 'center' },
+                        textAlign: { xs: 'center', sm: 'center' },
+                        minHeight: { xs: 'auto', sm: 'auto' },
+                    }}
+                >
+                    {icon && (
+                        <div
+                            style={{
+                                fontSize: '2rem',
+                                flexShrink: 0,
+                                minWidth: '2rem',
+                            }}
+                        >
+                            {icon}
+                        </div>
+                    )}
+                    <Typography
+                        level="body-lg"
+                        fontWeight="lg"
+                        sx={{
+                            flex: { xs: 1, sm: 'initial' },
+                            textAlign: { xs: 'center', sm: 'center' },
+                        }}
+                    >
                         {title}
                     </Typography>
                 </Stack>
