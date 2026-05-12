@@ -17,6 +17,7 @@ function Recipe() {
     const [thingsToTry, setThingsToTry] = useState<ThingToTry[]>([]);
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [selectedStep, setSelectedStep] = useState<number | null>(null);
+    const [selectedThingToTry, setSelectedThingToTry] = useState<number | null>(null);
 
     // Extract all ingredient names for highlighting
     const ingredientNames = useMemo(() => {
@@ -29,6 +30,31 @@ function Recipe() {
         // Only open drawer on mobile (viewport < md breakpoint of 900px)
         if (window.innerWidth < 900) {
             setDrawerOpen(true);
+        }
+    };
+
+    // Handle Thing to Try click
+    const handleThingToTryClick = (index: number, stepNumber?: string) => {
+        setSelectedThingToTry(index);
+        // If there's a step number, highlight that direction step
+        if (stepNumber) {
+            const stepIndex = parseInt(stepNumber) - 1; // Convert 1-indexed to 0-indexed
+            setSelectedStep(stepIndex);
+        } else {
+            setSelectedStep(null);
+        }
+    };
+
+    // Handle Direction click
+    const handleDirectionClick = (index: number) => {
+        setSelectedStep(index);
+        // Find if there's a Thing to Try with this step number
+        const stepNumber = (index + 1).toString(); // Convert 0-indexed to 1-indexed
+        const thingToTryIndex = thingsToTry.findIndex(item => item.stepNumber === stepNumber);
+        if (thingToTryIndex >= 0) {
+            setSelectedThingToTry(thingToTryIndex);
+        } else {
+            setSelectedThingToTry(null);
         }
     };
 
@@ -138,13 +164,18 @@ function Recipe() {
                                 </Typography>
                                 <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
                                     {thingsToTry.map((item, index) => (
-                                        <ListItem key={index}>
+                                        <ListItem
+                                            key={index}
+                                            onClick={() => handleThingToTryClick(index, item.stepNumber)}
+                                            sx={selectedThingToTry === index ? {
+                                                backgroundColor: 'warning.200',
+                                                borderLeft: '3px solid',
+                                                borderColor: 'warning.500',
+                                                color: 'warning.500',
+                                                cursor: 'pointer',
+                                            } : { cursor: 'pointer' }}
+                                        >
                                             {renderBoldText(item.suggestion)}
-                                            {item.stepNumber && (
-                                                <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
-                                                    (Step {item.stepNumber})
-                                                </Typography>
-                                            )}
                                         </ListItem>
                                     ))}
                                 </List>
@@ -209,13 +240,18 @@ function Recipe() {
                             </Typography>
                             <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
                                 {thingsToTry.map((item, index) => (
-                                    <ListItem key={index}>
+                                    <ListItem
+                                        key={index}
+                                        onClick={() => handleThingToTryClick(index, item.stepNumber)}
+                                        sx={selectedThingToTry === index ? {
+                                            backgroundColor: 'warning.200',
+                                            borderLeft: '3px solid',
+                                            borderColor: 'warning.500',
+                                            color: 'warning.500',
+                                            cursor: 'pointer',
+                                        } : { cursor: 'pointer' }}
+                                    >
                                         {renderBoldText(item.suggestion)}
-                                        {item.stepNumber && (
-                                            <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
-                                                (Step {item.stepNumber})
-                                            </Typography>
-                                        )}
                                     </ListItem>
                                 ))}
                             </List>
@@ -235,7 +271,7 @@ function Recipe() {
                             {directions.map((dir, index) => (
                                 <ListItem
                                     key={index}
-                                    onClick={() => setSelectedStep(index)}
+                                    onClick={() => handleDirectionClick(index)}
                                     sx={selectedStep === index ? {
                                         backgroundColor: 'success.50',
                                         borderLeft: '3px solid',
