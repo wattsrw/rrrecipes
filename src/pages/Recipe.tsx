@@ -94,32 +94,6 @@ function Recipe() {
                 </Box>
             </Drawer>
 
-            {/* Wait Times Section */}
-            {waitTimes.length > 0 && (
-                <Box
-                    sx={{
-                        backgroundColor: 'success.50',
-                        padding: '1.5rem',
-                        borderRadius: '8px',
-                        marginBottom: '1.5rem',
-                    }}
-                >
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
-                            <AccessTimeIcon />
-                        </Box>
-                        <Typography level="h3">
-                            Wait Times
-                        </Typography>
-                    </Box>
-                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
-                        {waitTimes.map((waitTime, index) => (
-                            <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
-                        ))}
-                    </List>
-                </Box>
-            )}
-
             <Grid container spacing={2}>
                 {/* Ingredients Section - Hidden on mobile */}
                 <Grid xs={12} md={6} sx={{ display: { xs: 'none', md: 'grid' } }}>
@@ -137,6 +111,31 @@ function Recipe() {
 
                 {/* Directions Section */}
                 <Grid xs={12} md={6}>
+                    {/* Wait Times Section */}
+                    {waitTimes.length > 0 && (
+                        <Box
+                            sx={{
+                                backgroundColor: 'success.50',
+                                padding: '1.5rem',
+                                borderRadius: '8px',
+                                marginBottom: '1.5rem',
+                            }}
+                        >
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                                <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
+                                    <AccessTimeIcon />
+                                </Box>
+                                <Typography level="h3">
+                                    Wait Times
+                                </Typography>
+                            </Box>
+                            <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                {waitTimes.map((waitTime, index) => (
+                                    <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
+                                ))}
+                            </List>
+                        </Box>
+                    )}
                     <Box sx={{
                         padding: '1rem',
                         borderRadius: '8px',

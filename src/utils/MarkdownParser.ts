@@ -33,7 +33,7 @@ export function parseRecipeMarkdown(content: string): ParsedRecipe {
     // Split content by section headers (handle both LF and CRLF line endings)
     const ingredientsMatch = content.match(/## Ingredients\r?\n([\s\S]*?)(?=## |$)/);
     const directionsMatch = content.match(/## Directions\r?\n([\s\S]*?)(?=## |$)/);
-    const waitTimesMatch = content.match(/## Wait times\r?\n([\s\S]*?)(?=## |$)/);
+    const waitTimesMatch = content.match(/## Wait Times\r?\n([\s\S]*?)(?=## |$)/);
     const thingsToTryMatch = content.match(/## Things to Try\r?\n([\s\S]*?)(?=## |$)/);
 
     if (ingredientsMatch) {

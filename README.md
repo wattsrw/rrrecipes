@@ -22,10 +22,10 @@
 
 ## If Updating Recipe File Structure
 Need to update:
-- recipe-file-rules.md
-- create-recipe.js
-- validate-recipes.js
-- MarkdownParser.ts
+- [recipe-file-rules.md](https://github.com/wattsrw/rrrecipes/blob/main/scripts/recipe-file-rules.md)
+- [create-recipe.js](https://github.com/wattsrw/rrrecipes/blob/main/scripts/create-recipe.js)
+- [validate-recipes.js](https://github.com/wattsrw/rrrecipes/blob/main/scripts/validate-recipes.js)
+- [MarkdownParser.ts](https://github.com/wattsrw/rrrecipes/blob/main/src/utils/MarkdownParser.ts)
 
 ## TODOs
 - In the ingredients, a line is clickable to highlight the ingredient?
