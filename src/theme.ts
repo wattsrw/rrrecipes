@@ -34,6 +34,18 @@ const theme = extendTheme({
                     800: '#03574a',
                     900: '#022933',
                 },
+                warning: {
+                    50: '#fef5ea',
+                    100: '#fde9d0',
+                    200: '#fdd9b3',
+                    300: '#fcc696',
+                    400: '#f9a833',
+                    500: '#ed941f',
+                    600: '#d67e0d',
+                    700: '#b86608',
+                    800: '#8c4f05',
+                    900: '#5c3104',
+                },
                 text: {
                     primary: FONT_COLOR,
                     icon: FONT_COLOR,
