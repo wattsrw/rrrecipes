@@ -21,7 +21,6 @@
     - If adding a new category, you may also want to add the category and icon to `categoryIconMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
 
 ## TODOs
-- In mobile, category tiles display icon on left side, smaller and inline
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?
         - divider?
