@@ -5,7 +5,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Layout from '../components/Layout';
 import { formatTitleFromSlug, highlightIngredientsInText, renderBoldText } from '../utils/Util';
 import IngredientList, { type IngredientSection } from '../components/IngredientList';
-import { parseRecipeMarkdown, type DirectionItem } from '../utils/MarkdownParser';
+import { parseRecipeMarkdown, type DirectionItem, type ThingToTry } from '../utils/MarkdownParser';
 
 function Recipe() {
     const { category, recipe } = useParams<{ category: string; recipe: string }>();
@@ -14,6 +14,7 @@ function Recipe() {
     const [ingredients, setIngredients] = useState<IngredientSection[]>([]);
     const [directions, setDirections] = useState<DirectionItem[]>([]);
     const [waitTimes, setWaitTimes] = useState<string[]>([]);
+    const [thingsToTry, setThingsToTry] = useState<ThingToTry[]>([]);
     const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
     const [selectedStep, setSelectedStep] = useState<number | null>(null);
 
@@ -46,6 +47,7 @@ function Recipe() {
                     setIngredients(parsed.ingredients);
                     setDirections(parsed.directions);
                     setWaitTimes(parsed.waitTimes);
+                    setThingsToTry(parsed.thingsToTry);
                 } else {
                     console.warn(`Markdown file not found: ${mdPath}`);
                 }
@@ -111,29 +113,66 @@ function Recipe() {
 
                 {/* Directions Section */}
                 <Grid xs={12} md={6}>
-                    {/* Wait Times Section */}
-                    {waitTimes.length > 0 && (
+                    {/* Wait Times and Things to Try Section */}
+                    {(waitTimes.length > 0 || thingsToTry.length > 0) && (
                         <Box
                             sx={{
-                                backgroundColor: 'success.50',
-                                padding: '1.5rem',
-                                borderRadius: '8px',
+                                display: 'grid',
+                                gridTemplateColumns: thingsToTry.length > 0 && waitTimes.length > 0 ? '1fr 1fr' : '1fr',
+                                gap: '1.5rem',
                                 marginBottom: '1.5rem',
                             }}
                         >
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                                <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
-                                    <AccessTimeIcon />
+                            {/* Wait Times Section */}
+                            {waitTimes.length > 0 && (
+                                <Box
+                                    sx={{
+                                        backgroundColor: 'success.50',
+                                        padding: '1.5rem',
+                                        borderRadius: '8px',
+                                    }}
+                                >
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                                        <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
+                                            <AccessTimeIcon />
+                                        </Box>
+                                        <Typography level="h3">
+                                            Wait Times
+                                        </Typography>
+                                    </Box>
+                                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                        {waitTimes.map((waitTime, index) => (
+                                            <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
+                                        ))}
+                                    </List>
                                 </Box>
-                                <Typography level="h3">
-                                    Wait Times
-                                </Typography>
-                            </Box>
-                            <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
-                                {waitTimes.map((waitTime, index) => (
-                                    <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
-                                ))}
-                            </List>
+                            )}
+                            {/* Things to Try Section */}
+                            {thingsToTry.length > 0 && (
+                                <Box
+                                    sx={{
+                                        backgroundColor: 'warning.100',
+                                        padding: '1.5rem',
+                                        borderRadius: '8px',
+                                    }}
+                                >
+                                    <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
+                                        Things to Try
+                                    </Typography>
+                                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                        {thingsToTry.map((item, index) => (
+                                            <ListItem key={index}>
+                                                {renderBoldText(item.suggestion)}
+                                                {item.stepNumber && (
+                                                    <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
+                                                        (Step {item.stepNumber})
+                                                    </Typography>
+                                                )}
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </Box>
+                            )}
                         </Box>
                     )}
                     <Box sx={{
