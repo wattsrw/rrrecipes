@@ -25,5 +25,5 @@
 1. Use spatula to separate bread from bucket sides
 1. Cool on wire rack for at least an hour
 
-## Wait times
+## Wait Times
 - Optional 1-2 hours before starting for butter to soften
