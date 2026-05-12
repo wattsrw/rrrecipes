@@ -97,6 +97,62 @@ function Recipe() {
             </Drawer>
 
             <Grid container spacing={2}>
+                {/* Top row: Wait Times and Things to Try if both exist */}
+                {waitTimes.length > 0 && thingsToTry.length > 0 && (
+                    <>
+                        {/* Wait Times - Left Column */}
+                        <Grid xs={12} md={6}>
+                            <Box
+                                sx={{
+                                    backgroundColor: 'success.50',
+                                    padding: '1.5rem',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                                    <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
+                                        <AccessTimeIcon />
+                                    </Box>
+                                    <Typography level="h3">
+                                        Wait Times
+                                    </Typography>
+                                </Box>
+                                <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                    {waitTimes.map((waitTime, index) => (
+                                        <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
+                                    ))}
+                                </List>
+                            </Box>
+                        </Grid>
+                        {/* Things to Try - Right Column */}
+                        <Grid xs={12} md={6}>
+                            <Box
+                                sx={{
+                                    backgroundColor: 'warning.100',
+                                    padding: '1.5rem',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
+                                    Things to Try
+                                </Typography>
+                                <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                    {thingsToTry.map((item, index) => (
+                                        <ListItem key={index}>
+                                            {renderBoldText(item.suggestion)}
+                                            {item.stepNumber && (
+                                                <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
+                                                    (Step {item.stepNumber})
+                                                </Typography>
+                                            )}
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </Box>
+                        </Grid>
+                    </>
+                )}
+
                 {/* Ingredients Section - Hidden on mobile */}
                 <Grid xs={12} md={6} sx={{ display: { xs: 'none', md: 'grid' } }}>
                     <Box
@@ -113,68 +169,59 @@ function Recipe() {
 
                 {/* Directions Section */}
                 <Grid xs={12} md={6}>
-                    {/* Wait Times and Things to Try Section */}
-                    {(waitTimes.length > 0 || thingsToTry.length > 0) && (
+                    {/* Wait Times only (if Things to Try doesn't exist) */}
+                    {waitTimes.length > 0 && thingsToTry.length === 0 && (
                         <Box
                             sx={{
-                                display: 'grid',
-                                gridTemplateColumns: thingsToTry.length > 0 && waitTimes.length > 0 ? '1fr 1fr' : '1fr',
-                                gap: '1.5rem',
+                                backgroundColor: 'success.50',
+                                padding: '1.5rem',
+                                borderRadius: '8px',
                                 marginBottom: '1.5rem',
                             }}
                         >
-                            {/* Wait Times Section */}
-                            {waitTimes.length > 0 && (
-                                <Box
-                                    sx={{
-                                        backgroundColor: 'success.50',
-                                        padding: '1.5rem',
-                                        borderRadius: '8px',
-                                    }}
-                                >
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                                        <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
-                                            <AccessTimeIcon />
-                                        </Box>
-                                        <Typography level="h3">
-                                            Wait Times
-                                        </Typography>
-                                    </Box>
-                                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
-                                        {waitTimes.map((waitTime, index) => (
-                                            <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
-                                        ))}
-                                    </List>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                                <Box sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', fontWeight: 'light' }}>
+                                    <AccessTimeIcon />
                                 </Box>
-                            )}
-                            {/* Things to Try Section */}
-                            {thingsToTry.length > 0 && (
-                                <Box
-                                    sx={{
-                                        backgroundColor: 'warning.100',
-                                        padding: '1.5rem',
-                                        borderRadius: '8px',
-                                    }}
-                                >
-                                    <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
-                                        Things to Try
-                                    </Typography>
-                                    <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
-                                        {thingsToTry.map((item, index) => (
-                                            <ListItem key={index}>
-                                                {renderBoldText(item.suggestion)}
-                                                {item.stepNumber && (
-                                                    <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
-                                                        (Step {item.stepNumber})
-                                                    </Typography>
-                                                )}
-                                            </ListItem>
-                                        ))}
-                                    </List>
-                                </Box>
-                            )}
+                                <Typography level="h3">
+                                    Wait Times
+                                </Typography>
+                            </Box>
+                            <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                {waitTimes.map((waitTime, index) => (
+                                    <ListItem key={index}>{renderBoldText(waitTime)}</ListItem>
+                                ))}
+                            </List>
                         </Box>
                     )}
+                    {/* Things to Try only (if Wait Times doesn't exist) */}
+                    {thingsToTry.length > 0 && waitTimes.length === 0 && (
+                        <Box
+                            sx={{
+                                backgroundColor: 'warning.100',
+                                padding: '1.5rem',
+                                borderRadius: '8px',
+                                marginBottom: '1.5rem',
+                            }}
+                        >
+                            <Typography level="h3" sx={{ marginBottom: '0.75rem' }}>
+                                Things to Try
+                            </Typography>
+                            <List marker="disc" sx={{ paddingLeft: '1.5rem' }}>
+                                {thingsToTry.map((item, index) => (
+                                    <ListItem key={index}>
+                                        {renderBoldText(item.suggestion)}
+                                        {item.stepNumber && (
+                                            <Typography level="body-sm" sx={{ marginLeft: '0.5rem', fontStyle: 'italic', color: 'text.secondary' }}>
+                                                (Step {item.stepNumber})
+                                            </Typography>
+                                        )}
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Box>
+                    )}
+                    {/* Directions - Always displayed */}
                     <Box sx={{
                         padding: '1rem',
                         borderRadius: '8px',
