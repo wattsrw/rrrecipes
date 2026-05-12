@@ -7,7 +7,7 @@ const recipesDir = path.join(__dirname, '../public/recipes');
 
 // Validation rules
 const KEBAB_CASE_REGEX = /^[a-z0-9&]+(-[a-z0-9&]+)*$/;
-const VALID_SECTIONS = ['## Ingredients', '## Directions', '## Wait Times'];
+const VALID_SECTIONS = ['## Ingredients', '## Directions', '## Wait Times', '## Things to Try'];
 const REQUIRED_SECTIONS = ['## Ingredients', '## Directions'];
 
 let errorCount = 0;
@@ -58,12 +58,14 @@ function validateRecipeContent(filePath, relPath) {
             ingredients: false,
             directions: false,
             waitTimes: false,
+            thingsToTry: false,
         };
 
         const sectionIndices = {
             ingredients: -1,
             directions: -1,
             waitTimes: -1,
+            thingsToTry: -1,
         };
 
         for (let i = 0; i < lines.length; i++) {
@@ -78,6 +80,10 @@ function validateRecipeContent(filePath, relPath) {
             if (lines[i].trim() === '## Wait Times') {
                 hasSections.waitTimes = true;
                 sectionIndices.waitTimes = i;
+            }
+            if (lines[i].trim() === '## Things to Try') {
+                hasSections.thingsToTry = true;
+                sectionIndices.thingsToTry = i;
             }
         }
 
@@ -98,10 +104,12 @@ function validateRecipeContent(filePath, relPath) {
             if (line.trim() === '## Ingredients') sectionOrder.push('ingredients');
             if (line.trim() === '## Directions') sectionOrder.push('directions');
             if (line.trim() === '## Wait Times') sectionOrder.push('waitTimes');
+            if (line.trim() === '## Things to Try') sectionOrder.push('thingsToTry');
         }
 
         const expectedOrder = ['ingredients', 'directions'];
         if (hasSections.waitTimes) expectedOrder.push('waitTimes');
+        if (hasSections.thingsToTry) expectedOrder.push('thingsToTry');
 
         // Verify order matches
         if (JSON.stringify(sectionOrder) !== JSON.stringify(expectedOrder)) {
@@ -126,8 +134,10 @@ function validateSectionListTypes(lines, sectionIndices, relPath) {
     const ingredientsStart = sectionIndices.ingredients + 1;
     const ingredientsEnd = sectionIndices.directions;
     const directionsStart = sectionIndices.directions + 1;
-    const directionsEnd = sectionIndices.waitTimes >= 0 ? sectionIndices.waitTimes : lines.length;
+    const directionsEnd = sectionIndices.waitTimes >= 0 ? sectionIndices.waitTimes : (sectionIndices.thingsToTry >= 0 ? sectionIndices.thingsToTry : lines.length);
     const waitTimesStart = sectionIndices.waitTimes >= 0 ? sectionIndices.waitTimes + 1 : -1;
+    const waitTimesEnd = sectionIndices.thingsToTry >= 0 ? sectionIndices.thingsToTry : lines.length;
+    const thingsToTryStart = sectionIndices.thingsToTry >= 0 ? sectionIndices.thingsToTry + 1 : -1;
 
     // Validate Ingredients section (should be unordered lists with `-`)
     for (let i = ingredientsStart; i < ingredientsEnd; i++) {
@@ -171,14 +181,45 @@ function validateSectionListTypes(lines, sectionIndices, relPath) {
 
     // Validate Wait Times section (should be unordered lists with `-`)
     if (waitTimesStart >= 0) {
-        for (let i = waitTimesStart; i < lines.length; i++) {
+        for (let i = waitTimesStart; i < waitTimesEnd; i++) {
             const line = lines[i];
             const trimmed = line.trim();
 
             if (!trimmed) continue; // Skip empty lines
 
-            if (!trimmed.startsWith('-') && !trimmed.startsWith('##')) {
-                logError(`Invalid list item in Wait Times section at ${relPath} (line ${i + 1}): "${trimmed}". Wait times must be unordered lists (start with "-").`);
+            if (!line.startsWith('    ') && trimmed && !trimmed.startsWith('##')) {
+                if (!trimmed.startsWith('-')) {
+                    logError(`Invalid list item in Wait Times section at ${relPath} (line ${i + 1}): "${trimmed}". Wait times must be unordered lists (start with "-").`);
+                    return false;
+                }
+            }
+
+            // Check indented lines (sub-items) start with `-`
+            if (line.startsWith('    ') && trimmed && !trimmed.startsWith('-')) {
+                logError(`Invalid sub-item in Wait Times section at ${relPath} (line ${i + 1}): "${trimmed}". Sub-items must start with "-".`);
+                return false;
+            }
+        }
+    }
+
+    // Validate Things to Try section (should be unordered lists with `-`)
+    if (thingsToTryStart >= 0) {
+        for (let i = thingsToTryStart; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmed = line.trim();
+
+            if (!trimmed) continue; // Skip empty lines
+
+            if (!line.startsWith('    ') && trimmed && !trimmed.startsWith('##')) {
+                if (!trimmed.startsWith('-')) {
+                    logError(`Invalid list item in Things to Try section at ${relPath} (line ${i + 1}): "${trimmed}". Things to try must be unordered lists (start with "-").`);
+                    return false;
+                }
+            }
+
+            // Check indented lines (step numbers) start with `-`
+            if (line.startsWith('    ') && trimmed && !trimmed.startsWith('-')) {
+                logError(`Invalid step number in Things to Try section at ${relPath} (line ${i + 1}): "${trimmed}". Step numbers must start with "-".`);
                 return false;
             }
         }

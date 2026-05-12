@@ -10,10 +10,16 @@ export interface DirectionItem {
     notes?: string[];
 }
 
+export interface ThingToTry {
+    suggestion: string;
+    stepNumber?: string;
+}
+
 export interface ParsedRecipe {
     ingredients: IngredientSection[];
     directions: DirectionItem[];
     waitTimes: string[];
+    thingsToTry: ThingToTry[];
 }
 
 export function parseRecipeMarkdown(content: string): ParsedRecipe {
@@ -21,12 +27,14 @@ export function parseRecipeMarkdown(content: string): ParsedRecipe {
         ingredients: [],
         directions: [],
         waitTimes: [],
+        thingsToTry: [],
     };
 
     // Split content by section headers (handle both LF and CRLF line endings)
     const ingredientsMatch = content.match(/## Ingredients\r?\n([\s\S]*?)(?=## |$)/);
     const directionsMatch = content.match(/## Directions\r?\n([\s\S]*?)(?=## |$)/);
     const waitTimesMatch = content.match(/## Wait times\r?\n([\s\S]*?)(?=## |$)/);
+    const thingsToTryMatch = content.match(/## Things to Try\r?\n([\s\S]*?)(?=## |$)/);
 
     if (ingredientsMatch) {
         result.ingredients = parseIngredients(ingredientsMatch[1].trim());
@@ -38,6 +46,10 @@ export function parseRecipeMarkdown(content: string): ParsedRecipe {
 
     if (waitTimesMatch) {
         result.waitTimes = parseWaitTimes(waitTimesMatch[1].trim());
+    }
+
+    if (thingsToTryMatch) {
+        result.thingsToTry = parseThingsToTry(thingsToTryMatch[1].trim());
     }
 
     return result;
@@ -165,11 +177,51 @@ function parseWaitTimes(content: string): string[] {
 
     for (const line of lines) {
         const trimmed = line.trim();
-        if (trimmed.startsWith('-')) {
+        if (trimmed.startsWith('-') && !line.startsWith('    ')) {
             const time = trimmed.substring(1).trim();
             times.push(time);
         }
     }
 
     return times;
+}
+
+function parseThingsToTry(content: string): ThingToTry[] {
+    const items: ThingToTry[] = [];
+    const lines = content.split('\n');
+    let i = 0;
+
+    while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        // Skip empty lines
+        if (!trimmed) {
+            i++;
+            continue;
+        }
+
+        // Check for suggestion item (-)
+        if (trimmed.startsWith('-') && !line.startsWith('    ')) {
+            const suggestion = trimmed.substring(1).trim();
+            const item: ThingToTry = { suggestion };
+
+            // Check if next line has a step number (indented)
+            if (i + 1 < lines.length) {
+                const nextLine = lines[i + 1];
+                if (nextLine.startsWith('    ') && nextLine.trim().startsWith('-')) {
+                    const stepNumber = nextLine.trim().substring(1).trim();
+                    item.stepNumber = stepNumber;
+                    i++; // Skip next line as we've processed it
+                }
+            }
+
+            items.push(item);
+            i++;
+        } else {
+            i++;
+        }
+    }
+
+    return items;
 }

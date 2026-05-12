@@ -34,6 +34,11 @@ const recipeTemplate = `## Ingredients
 ## Wait Times // Optional section
 - Let butter rest for 2 hours // Unordered list item
 - Item 2
+
+## Things to Try // Optional section
+- Variation 1 // Unordered list item
+    - 2 // Optional associated step number
+- Variation 2
 `;
 
 async function promptUser() {

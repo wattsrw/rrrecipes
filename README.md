@@ -20,6 +20,13 @@
     ```
     - If adding a new category, you may also want to add the category and icon to `categoryIconMap` in [Home.tsx](https://github.com/wattsrw/rrrecipes/blob/main/src/pages/Home.tsx#L12).
 
+## If Updating Recipe File Structure
+Need to update:
+- recipe-file-rules.md
+- create-recipe.js
+- validate-recipes.js
+- MarkdownParser.ts
+
 ## TODOs
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?

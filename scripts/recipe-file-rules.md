@@ -47,6 +47,7 @@ All recipes must include these sections in this order:
 ### Optional Sections
 
 - **## Wait Times** - Optional section for wait times between steps
+- **## Things to Try** - Optional section for recipe variations and suggestions
 
 ### Section Order
 
@@ -54,6 +55,7 @@ Sections must appear in this exact order:
 1. `## Ingredients` (required)
 2. `## Directions` (required)
 3. `## Wait Times` (optional)
+4. `## Things to Try` (optional)
 
 ## Ingredients Section Format
 
@@ -154,6 +156,36 @@ Sections must appear in this exact order:
 - Dough can be refrigerated **30 minutes to 24 hours**
 ```
 
+## Things to Try Section Format
+
+```markdown
+## Things to Try // Optional section
+- Add chocolate chips instead of raisins // Unordered list item
+    - 3 // Optional step number
+- Substitute butter with coconut oil
+```
+
+### Rules
+
+- Things to try are unordered lists (start with `-`)
+- Each line becomes a separate suggestion
+- Step numbers are optional and indented with 4 spaces
+- Step number lines must start with `-` (indicating a sub-item)
+- Comments (after `//`) are optional and ignored by the parser
+- Bold text using `**text**` is supported and will render in the UI
+- Step numbers indicate which direction step the suggestion applies to
+
+### Example
+
+```markdown
+## Things to Try
+- Swap **white chocolate** for dark chocolate
+    - 4
+- Add **espresso powder** for deeper flavor
+    - 2
+- Try **almond extract** instead of vanilla
+```
+
 ## Markdown Features
 
 ### Bold Text
@@ -222,5 +254,6 @@ Before committing a new recipe, ensure:
 - [ ] All directions are numbered with `1.`
 - [ ] Optional notes under directions start with `-` and are indented
 - [ ] Optional `## Wait Times` section (if applicable) contains unordered list items
+- [ ] Optional `## Things to Try` section (if applicable) contains unordered list items with optional step numbers
 - [ ] No syntax errors in markdown structure
 - [ ] `npm run generate-routes` successfully regenerates routes
