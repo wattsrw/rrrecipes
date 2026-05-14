@@ -8,6 +8,6 @@
 1. Heat oil in skillet at **medium-high heat**
 1. Place chicken with **top side down** in skillet. Cook for **2-3 minutes**.
 1. Flip chicken
-1. Turn heat to **low and cover**
+1. Turn heat to **medium-low and cover**
 1. Cook for 10-15 minutes
     - **15 minutes** works best

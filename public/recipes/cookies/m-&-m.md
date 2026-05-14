@@ -24,9 +24,10 @@
 
 ## Directions
 1. Preheat oven to **375 degrees**. 
-1. Cream together butter and sugars until combined.
-1. Beat in eggs and vanilla until light.
-1. Mix in flour, baking soda, baking powder and salt until combined.
+1. Combine flour, baking soda, baking powder and salt until combined in big bowl.
+1. Cream together butter and sugars until combined in medium bowl.
+1. Beat in eggs and vanilla until light in same medium bowl.
+1. Mix in wet ingredients into dry ingrdients
 1. Add chocolate chips and M&Ms and mix well.
 1. Cookie dough can be refrigerated **30 minutes to 24 hours**
     - Up to a couple days

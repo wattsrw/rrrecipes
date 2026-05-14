@@ -20,7 +20,6 @@
     - Only put in 2 eggs. Save one egg for after braiding
 1. Put bucket into bread machine
 1. Menu option **#12 (Leaven dough)** 
-    - Largest loaf size
 1. Start machine
 1. Heat oven to **350 degrees**
 1. Place parchment paper on baking sheet
