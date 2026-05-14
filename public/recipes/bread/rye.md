@@ -25,13 +25,13 @@
 1. Add other ingredients to bucket
     - Add flour and then yeast last
 1. Put bucket into bread machine
-1. Menu option #1 (Soft Bread)
-1. Light color
-1. Largest loaf size
+1. Menu option **#1 (Soft Bread)**
+    - Light color
+    - Largest loaf size
 1. Start machine
-1. Let cool in machine for a bit
+1. Let cool in bucket for a bit
 1. Use spatula to separate bread from bucket sides
 1. Cool on wire rack for at least an hour
 
 ## Wait Times
-- Optional 1-2 hours before starting for butter to soften
+- Optional **1-2 hours** before starting for butter to soften

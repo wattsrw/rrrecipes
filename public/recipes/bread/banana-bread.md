@@ -23,22 +23,23 @@
     - 1 cup
 
 ## Directions
-1. Can use 1/2 cup oil instead of butter
-    - Is oil better?
 1. Beat eggs
 1. Mash bananas with fork
 1. Add all ingredients to bucket
 1. Put bucket into bread machine
-1. Menu option #10 (Cake)
-1. Dark color
-1. Largest loaf size
+1. Menu option **#10 (Cake)**
+    - Dark color
+    - Largest loaf size
 1. Start machine
-1. After 19-20 minutes (before starts heating), use spatula to separate ingredients from sides of bucket
-1. Immediately after #10 (Cake) cyle is finished, bake an additional 40 minutes
-    - menu option #14 (Bake)
-1. Let cool in machine for a bit
+1. After **19-20 minutes** (before starts heating), use spatula to separate ingredients from sides of bucket
+1. Immediately after #10 (Cake) cyle is finished, use menu option **#14 (Bake)** to bake an additional **40 minutes**
+1. Let cool in bucket for a bit
 1. Use spatula to separate bread from bucket sides
 1. Cool on wire rack for at least an hour
 
 ## Wait Times
-- Optional 1-2 hours before starting for butter to soften
+- Optional **1-2 hours** before starting for butter to soften
+
+## Things to Try
+- Try olive oil instead of butter
+    - 3
