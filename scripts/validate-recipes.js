@@ -117,6 +117,17 @@ function validateRecipeContent(filePath, relPath) {
             return false;
         }
 
+        // Check for invalid/unknown sections
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line.startsWith('## ')) {
+                if (!VALID_SECTIONS.includes(line)) {
+                    logError(`Invalid section in ${relPath} (line ${i + 1}): "${line}". Valid sections are: ${VALID_SECTIONS.join(', ')}`);
+                    return false;
+                }
+            }
+        }
+
         // Validate list types within sections
         if (!validateSectionListTypes(lines, sectionIndices, relPath)) {
             return false;
