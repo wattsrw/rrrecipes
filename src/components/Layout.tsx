@@ -25,7 +25,7 @@ function Layout({ children, title, ...props }: LayoutProps) {
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Typography level="h1">{title}</Typography>
                             <IconButton
-                                onClick={() => window.open('https://docs.google.com/forms/d/e/fake-form-id/viewform', '_blank')}
+                                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSewSbW9Uw0T5zM-XEZ4GS_j_r24Vsmds1SXboTBb6jE1siZHw/viewform?usp=header', '_blank')}
                                 variant="plain"
                                 color="primary"
                             >
