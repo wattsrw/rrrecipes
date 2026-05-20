@@ -21,7 +21,6 @@
     - 2 cups
 
 ## Directions
-1. Preheat oven to **375 degrees**. 
 1. Combine flour, baking soda, baking powder and salt until combined in big bowl.
 1. Cream together butter and sugars until combined in medium bowl.
 1. Beat in eggs and vanilla until light in same medium bowl.
@@ -29,6 +28,7 @@
 1. Add chocolate chips and mix well.
 1. Cookie dough can be refrigerated **30 minutes to 24 hours**
     - Up to a couple days
+1. Preheat oven to **375 degrees**. 
 1. Line baking sheets with parchment paper and set aside.
 1. Roll **2 tablespoons of dough** at a time into balls and place them evenly spaced on your prepared cookie sheets.
 1. Bake in oven for approximately **8-10 minutes**. Take them out when they are just barely starting to turn brown.
