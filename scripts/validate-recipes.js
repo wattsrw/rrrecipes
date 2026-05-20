@@ -214,6 +214,7 @@ function validateSectionListTypes(lines, sectionIndices, relPath) {
     }
 
     // Validate Things to Try section (should be unordered lists with `-`)
+    // Note: This section can be empty (just the header with no items)
     if (thingsToTryStart >= 0) {
         for (let i = thingsToTryStart; i < lines.length; i++) {
             const line = lines[i];
@@ -221,7 +222,12 @@ function validateSectionListTypes(lines, sectionIndices, relPath) {
 
             if (!trimmed) continue; // Skip empty lines
 
-            if (!line.startsWith('    ') && trimmed && !trimmed.startsWith('##')) {
+            // Stop if we hit another section header
+            if (trimmed.startsWith('##')) {
+                break;
+            }
+
+            if (!line.startsWith('    ') && trimmed) {
                 if (!trimmed.startsWith('-')) {
                     logError(`Invalid list item in Things to Try section at ${relPath} (line ${i + 1}): "${trimmed}". Things to try must be unordered lists (start with "-").`);
                     return false;

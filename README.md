@@ -30,7 +30,6 @@ Need to update:
 ## TODOs
 - In validator
     - for all sections, validate that title has the correct capitalization and that the lists are the correct type (unordered or ordered)
-- Allow for an empty Things to Try section in the markdown, don't display it if it is empty
 - breadcrumbs (as title??)
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?
