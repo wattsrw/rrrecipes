@@ -8,6 +8,7 @@ export const RECIPE_MAPPING = {
     "rye"
   ],
   "cookies": [
+    "banana-oatmeal-chocolate-chip",
     "chocolate-chip",
     "hamantaschen",
     "m-&-m"
@@ -17,13 +18,16 @@ export const RECIPE_MAPPING = {
     "chicken-thighs",
     "potatoes"
   ],
-  "ice-cream": [],
+  "ice-cream": [
+    "vanilla"
+  ],
   "meat": [
     "burgers",
     "chicken-breasts",
     "chicken-thighs",
     "salmon",
-    "steak"
+    "steak",
+    "turkey-roast"
   ],
   "muffins": [],
   "sandwich": [

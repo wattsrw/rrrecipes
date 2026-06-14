@@ -35,7 +35,6 @@ Need to update:
     - accent every other line?
         - divider?
         - alternating colors?
-- update/add functionality that creates an issue in github repo
 - search
 - update `copilot-instructions.md`
 
@@ -47,7 +46,6 @@ Need to update:
     - latkes
 - ice cream
     - chocolate
-    - vanilla
 - cookies
     - mom's holiday cookie
 - muffins
