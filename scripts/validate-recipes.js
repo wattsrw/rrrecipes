@@ -117,12 +117,19 @@ function validateRecipeContent(filePath, relPath) {
             return false;
         }
 
-        // Check for invalid/unknown sections
+        // Check for invalid/unknown sections and incorrect capitalization
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim();
             if (line.startsWith('## ')) {
                 if (!VALID_SECTIONS.includes(line)) {
-                    logError(`Invalid section in ${relPath} (line ${i + 1}): "${line}". Valid sections are: ${VALID_SECTIONS.join(', ')}`);
+                    // Check if it's a capitalization issue
+                    const lowerCaseVersion = line.toLowerCase();
+                    const matchedSection = VALID_SECTIONS.find(s => s.toLowerCase() === lowerCaseVersion);
+                    if (matchedSection) {
+                        logError(`Incorrect capitalization in ${relPath} (line ${i + 1}): "${line}". Should be "${matchedSection}".`);
+                    } else {
+                        logError(`Invalid section in ${relPath} (line ${i + 1}): "${line}". Valid sections are: ${VALID_SECTIONS.join(', ')}`);
+                    }
                     return false;
                 }
             }

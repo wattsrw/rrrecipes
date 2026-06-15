@@ -28,8 +28,6 @@ Need to update:
 - [MarkdownParser.ts](https://github.com/wattsrw/rrrecipes/blob/main/src/utils/MarkdownParser.ts)
 
 ## TODOs
-- In validator
-    - for all sections, validate that title has the correct capitalization and that the lists are the correct type (unordered or ordered)
 - breadcrumbs (as title??)
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?
