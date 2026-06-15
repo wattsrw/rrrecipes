@@ -60,12 +60,29 @@ function Layout({ children, title, ...props }: LayoutProps) {
             {...props}
         >
             <Stack spacing={2}>
+                {title && (
+                    <>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography level="h1">{title}</Typography>
+                            <IconButton
+                                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSewSbW9Uw0T5zM-XEZ4GS_j_r24Vsmds1SXboTBb6jE1siZHw/viewform?usp=header', '_blank')}
+                                variant="plain"
+                                color="primary"
+                            >
+                                <EditIcon />
+                            </IconButton>
+                        </Box>
+                        <Divider sx={{ borderColor: FONT_COLOR }} />
+                    </>
+                )}
                 {breadcrumbs && (
                     <Breadcrumbs
                         separator="/"
-                        sx={{
-                            '--Breadcrumbs-gap': '0.5rem',
-                            fontSize: 'sm',
+                        size="sm"
+                        slotProps={{
+                            root: {
+                                style: { margin: 0, padding: 0 }
+                            }
                         }}
                     >
                         {breadcrumbs.map((crumb, index) => (
@@ -89,21 +106,6 @@ function Layout({ children, title, ...props }: LayoutProps) {
                             </Link>
                         ))}
                     </Breadcrumbs>
-                )}
-                {title && (
-                    <>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography level="h1">{title}</Typography>
-                            <IconButton
-                                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSewSbW9Uw0T5zM-XEZ4GS_j_r24Vsmds1SXboTBb6jE1siZHw/viewform?usp=header', '_blank')}
-                                variant="plain"
-                                color="primary"
-                            >
-                                <EditIcon />
-                            </IconButton>
-                        </Box>
-                        <Divider sx={{ borderColor: FONT_COLOR }} />
-                    </>
                 )}
                 {children}
             </Stack>

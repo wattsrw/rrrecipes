@@ -28,7 +28,6 @@ Need to update:
 - [MarkdownParser.ts](https://github.com/wattsrw/rrrecipes/blob/main/src/utils/MarkdownParser.ts)
 
 ## TODOs
-- breadcrumbs (as title??)
 - In the ingredients, a line is clickable to highlight the ingredient?
     - accent every other line?
         - divider?
