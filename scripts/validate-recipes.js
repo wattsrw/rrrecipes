@@ -7,6 +7,7 @@ const recipesDir = path.join(__dirname, '../public/recipes');
 
 // Validation rules
 const KEBAB_CASE_REGEX = /^[a-z0-9&]+(-[a-z0-9&]+)*$/;
+const RECIPE_FILE_NAME_REGEX = /^[a-z0-9&()]+(-[a-z0-9&()]+)*$/;
 const VALID_SECTIONS = ['## Ingredients', '## Directions', '## Wait Times', '## Things to Try'];
 const REQUIRED_SECTIONS = ['## Ingredients', '## Directions'];
 
@@ -40,8 +41,8 @@ function validateFileName(file, relPath) {
     }
 
     const nameWithoutExt = file.slice(0, -3);
-    if (!isValidKebabCase(nameWithoutExt)) {
-        logError(`Invalid file name: "${file}" at ${relPath}. Must be kebab-case (lowercase with hyphens only).`);
+    if (!RECIPE_FILE_NAME_REGEX.test(nameWithoutExt)) {
+        logError(`Invalid file name: "${file}" at ${relPath}. Must be kebab-case (lowercase with hyphens only) and may include parentheses for variants.`);
         return false;
     }
 

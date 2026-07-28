@@ -5,6 +5,7 @@ export const RECIPE_MAPPING = {
     "challah",
     "cornbread",
     "french",
+    "raisin-bread",
     "rye"
   ],
   "cookies": [
@@ -25,7 +26,8 @@ export const RECIPE_MAPPING = {
     "burgers",
     "chicken-breasts",
     "chicken-thighs",
-    "salmon",
+    "salmon-(baked)",
+    "salmon-(skillet)",
     "steak",
     "turkey-roast"
   ],

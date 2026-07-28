@@ -7,15 +7,16 @@
 - Example: `bread`, `meat`, `ice-cream`, `m-&-m` (not `Bread`, `meatDishes`, etc.)
 - Special characters are converted:
   - Spaces → hyphens: `ice cream` → `ice-cream`
+  - Parentheses are preserved for recipe variants: `salmon-(baked)`
   - All other special characters are removed: `mom's` → `moms`
 
 ## File Naming Convention
 
 - Recipe markdown files must use **kebab-case** (lowercase with hyphens)
-- Ampersands (`&`) are allowed: `m-&-m.md`
+- Ampersands (`&`) and parentheses (`(`, `)`) are allowed: `m-&-m.md`, `salmon-(baked).md`
 - File extension is always `.md`
-- Examples: `chocolate-chip.md`, `banana-bread.md`, `grilled-cheese.md`, `m-&-m.md`
-- The same rules apply as for directories
+- Examples: `chocolate-chip.md`, `banana-bread.md`, `grilled-cheese.md`, `m-&-m.md`, `salmon-(baked).md`
+- The same base rules apply as for directories, with parentheses allowed for recipe variants
 
 ## Directory Structure
 
