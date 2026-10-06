@@ -23,6 +23,7 @@ export const RECIPE_MAPPING = {
     "vanilla"
   ],
   "meat": [
+    "boneless-leg-of-lamb",
     "burgers",
     "chicken-breasts",
     "chicken-thighs",

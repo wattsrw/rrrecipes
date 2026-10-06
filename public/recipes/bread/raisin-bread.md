@@ -36,5 +36,7 @@
 - Optional **1-2 hours** before starting for butter to soften
 
 ## Things to Try
+- Middle was a little not cooked
+    - Try dark loaf or baking longer
 - Try Golden Raisins
 - Try up to 3 teaspoons of cinnamon
